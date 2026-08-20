@@ -3,127 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LABIRENT CLUB</title>
+  <title>Haqqımızda - LABIRENT CLUB</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: #0b1120; color: #f8fafc; font-family: Arial, sans-serif; }
-
-    /* Yuxarı Menyular */
-    .navbar {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      background-color: #0f172a;
-      padding: 10px;
-      border-bottom: 2px solid #1e293b;
+    body { 
+      background-color: #0b1120; 
+      color: #f8fafc; 
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
     }
 
-    .nav-btn {
-      background-color: #1e293b;
-      color: #94a3b8;
-      border: 1px solid #334155;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
+    .container { 
+      max-width: 800px; 
+      margin: 50px auto; 
+      padding: 20px; 
+    }
+
+    /* Ana səhifəyə qayıtmaq üçün keçid linki */
+    .back-link {
+      display: inline-block;
+      color: #38bdf8;
+      text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
+      margin-bottom: 25px;
+      font-size: 15px;
     }
+    .back-link:hover { text-decoration: underline; }
 
-    .nav-btn:hover, .nav-btn.active {
-      background-color: #0284c7;
+    .page-title {
       color: #ffffff;
-      border-color: #38bdf8;
+      font-size: 32px;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #1e293b;
+      padding-bottom: 10px;
     }
 
-    /* Bölmələrin görünməsi */
-    .tab-content { display: none; padding: 30px 20px; }
-    .tab-content.active { display: block; }
-
-    /* Haqqımızda və Məqsədimiz Dizaynı */
-    .about-container { max-width: 900px; margin: 0 auto; }
-    .about-box {
+    .box {
       background-color: #1e293b;
       border: 1px solid #334155;
       padding: 25px;
       border-radius: 10px;
       margin-bottom: 20px;
     }
-    .about-box h2 { color: #38bdf8; margin-bottom: 10px; font-size: 20px; }
-    .about-box p { color: #cbd5e1; font-size: 15px; line-height: 1.6; margin-bottom: 10px; }
 
-    /* Məsuliyyətdən İmtina */
+    .box h2 { 
+      color: #38bdf8; 
+      font-size: 20px; 
+      margin-bottom: 12px; 
+    }
+
+    .box p { 
+      color: #cbd5e1; 
+      font-size: 15px; 
+      margin-bottom: 10px; 
+    }
+
+    .box p:last-child { margin-bottom: 0; }
+
+    /* Məsuliyyətdən İmtina / Xəbərdarlıq Qutusu */
     .disclaimer-box {
       background-color: rgba(239, 68, 68, 0.1);
       border-left: 4px solid #ef4444;
       padding: 15px 20px;
       border-radius: 6px;
-      margin-top: 20px;
+      margin-top: 30px;
     }
-    .disclaimer-box p { color: #f87171; font-size: 13px; margin: 0; line-height: 1.5; }
+
+    .disclaimer-box p { 
+      color: #f87171; 
+      font-size: 13px; 
+      margin: 0; 
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVİQASİYA MENYUSU -->
-  <div class="navbar">
-    <button class="nav-btn active" onclick="openTab('pc')">PC Programları</button>
-    <button class="nav-btn" onclick="openTab('ps3')">PS3 Bölməsi</button>
-    <button class="nav-btn" onclick="openTab('about')">Haqqımızda</button>
-  </div>
+  <div class="container">
+    
+    <!-- Ana səhifəyə qaytaracaq link -->
+    <a href="index.html" class="back-link">← Ana Səhifəyə Qayıt</a>
 
-  <!-- 1. PC PRONQRAMLARI (Sənin mövcud kartların buraya gedir) -->
-  <div id="pc" class="tab-content active">
-    <h2 style="text-align:center; margin-bottom:20px;">PC Proqramları</h2>
-    <!-- Burada mövcud proqram kartların olacaq -->
-  </div>
+    <h1 class="page-title">Haqqımızda</h1>
 
-  <!-- 2. PS3 BÖLMƏSİ -->
-  <div id="ps3" class="tab-content">
-    <h2 style="text-align:center; margin-bottom:20px;">PS3 Bölməsi</h2>
-    <p style="text-align:center; color:#94a3b8;">PS3 oyunları və sistem faylları tezliklə əlavə olunacaq...</p>
-  </div>
-
-  <!-- 3. HAQQIMIZDA BÖLMƏSİ -->
-  <div id="about" class="tab-content">
-    <div class="about-container">
-      
-      <div class="about-box">
-        <h2>Biz Kimik?</h2>
-        <p>Biz uzun illərdir texnologiya, proqramlaşdırma, aparat təminatı (hardware) və server idarəçiliyi sahəsində fasiləsiz fəaliyyət göstərən komandayıq. Fəaliyyət illərimiz ərzində kompüter və oyun konsollarının təmiri, xüsusi Telegram botlarının yazılması və server modifikasiyaları sahəsində zəngin praktiki təcrübə toplamışıq.</p>
-        <p>Yaratdığımız <strong>Labirent Service</strong> brendi ilə istifadəçilərə texniki dəstək göstərir, <strong>404 Team</strong> icmamız vasitəsilə isə rəqəmsal mühitdə nizam-intizam və komanda ruhunu qoruyub saxlayırıq.</p>
-      </div>
-
-      <div class="about-box">
-        <h2>Məqsədimiz və Missiyamız</h2>
-        <p><strong>Məqsədimiz:</strong> Saytımızda istifadəçilərə ən faydalı proqramları, texnoloji yenilikləri və xidmətləri rahat, sürətli və vahid bir unvanda təqdim etməkdir.</p>
-        <p><strong>Missiyamız:</strong> Texnika və proqram təminatı sahəsində ortaya çıxan mürəkkəb problemləri illərin verdiyi təcrübə ilə ən qısa zamanda və keyfiyyətli şəkildə həll etməkdir.</p>
-      </div>
-
-      <div class="disclaimer-box">
-        <p><strong>Uyarı / Məsuliyyətdən İmtina:</strong> Bu siteden başka sitelere link olarak çeşitli programlar yer almaktadır. Sitemiz, link verilen bu programların içeriğinden, programı kullanmanızdan ötürü meydana gelecek problemlerden hiçbir şekilde sorumlu değildir.</p>
-      </div>
-
+    <!-- Haqqımızda Mətni -->
+    <div class="box">
+      <h2>Biz Kimik?</h2>
+      <p>
+        Biz uzun illərdir texnologiya, proqramlaşdırma, aparat təminatı (hardware) və server idarəçiliyi sahəsində fasiləsiz fəaliyyət göstərən komandayıq. Fəaliyyət illərimiz ərzində kompüter və oyun konsollarının təmiri, xüsusi Telegram botlarının yazılması və server modifikasiyaları sahəsində zəngin praktiki təcrübə toplamışıq.
+      </p>
+      <p>
+        Yaratdığımız <strong>Labirent Service</strong> brendi ilə istifadəçilərə texniki dəstək göstərir, <strong>404 Team</strong> icmamız vasitəsilə isə rəqəmsal mühitdə nizam-intizam və komanda ruhunu qoruyub saxlayırıq.
+      </p>
     </div>
+
+    <!-- Məqsəd və Missiya -->
+    <div class="box">
+      <h2>Məqsədimiz və Missiyamız</h2>
+      <p>
+        <strong>Məqsədimiz:</strong> Saytımızda istifadəçilərə ən faydalı proqramları, texnoloji yenilikləri və xidmətləri rahat, sürətli və vahid bir ünvanda təqdim etməkdir.
+      </p>
+      <p>
+        <strong>Missiyamız:</strong> Texnika və proqram təminatı sahəsində ortaya çıxan mürəkkəb problemləri illərin verdiyi təcrübə ilə ən qısa zamanda və keyfiyyətli şəkildə həll etməkdir.
+      </p>
+    </div>
+
+    <!-- Məsuliyyətdən İmtina -->
+    <div class="disclaimer-box">
+      <p>
+        <strong>Məsuliyyətdən İmtina:</strong> Bu siteden başka sitelere link olarak çeşitli programlar yer almaktadır. Sitemiz, link verilen bu programların içeriğinden, programı kullanmanızdan ötürü meydana gelecek problemlerden hiçbir şekilde sorumlu değildir.
+      </p>
+    </div>
+
   </div>
-
-  <!-- SEKMƏLƏRİ DƏYİŞMƏK ÜÇÜN JAVASCRIPT -->
-  <script>
-    function openTab(tabName) {
-      var contents = document.querySelectorAll('.tab-content');
-      var buttons = document.querySelectorAll('.nav-btn');
-
-      contents.forEach(function(content) {
-        content.classList.remove('active');
-      });
-
-      buttons.forEach(function(btn) {
-        btn.classList.remove('active');
-      });
-
-      document.getElementById(tabName).classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
-  </script>
 
 </body>
 </html>
