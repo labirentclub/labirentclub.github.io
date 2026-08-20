@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -13,8 +12,14 @@
         nav { background: #2c3e50; display: flex; justify-content: center; border-bottom: 2px solid #34495e; }
         nav a { color: #fff; text-decoration: none; padding: 14px 25px; font-weight: bold; font-size: 15px; display: block; }
         nav a:hover, nav a.active { background: #00a8ff; color: #fff; }
+        
         .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
-        .section-title { font-size: 22px; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #00a8ff; color: #2c3e50; }
+        
+        /* Axtarış Kutusu Stylinqi */
+        .search-box { margin-bottom: 30px; text-align: center; }
+        .search-input { width: 100%; max-width: 600px; padding: 14px 20px; font-size: 16px; border: 2px solid #00a8ff; border-radius: 25px; outline: none; transition: box-shadow 0.3s; }
+        .search-input:focus { box-shadow: 0 0 10px rgba(0, 168, 255, 0.4); }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
         .card { background: #fff; border: 1px solid #e1e8ed; padding: 18px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -38,82 +43,107 @@
 </nav>
 
 <div class="container">
-    <h2 class="section-title">Əsas PC Proqramları (50 Ədəd)</h2>
-    <div class="grid">
-        
-        <!-- Arxiv və Sistem -->
-        <div class="card"><h3>1. WinRAR (64-Bit)</h3><p>Faylları sıxlaşdırmaq və RAR/ZIP arxivlərini açmaq üçün.</p><a href="https://www.win-rar.com/fileadmin/winrar-versions/winrar/wrar624az.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>2. 7-Zip</h3><p>Tamamilə pulsuz, yüksək sıxlaşdırmalı arxiv proqramı.</p><a href="https://www.7-zip.org/a/7z2301-x64.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>3. Rufus USB Boot</h3><p>Önyüklənə bilən (Bootable) USB fləş kart yaradan alət.</p><a href="https://github.com/pbatard/rufus/releases/download/v4.4/rufus-4.4.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>4. CCleaner</h3><p>Sistem fayllarını təmizləyən və sürətləndirən proqram.</p><a href="https://www.ccleaner.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>5. Driver Booster</h3><p>Köhnəlmiş kompyuter drayverlərini avtomatik yeniləyir.</p><a href="https://www.iobit.com/en/driver-booster.php" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+    <!-- Axtarış Bölməsi -->
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" onkeyup="filterPrograms()" placeholder="Proqram adı və ya təyinatı yazın (məs: WinRAR, Chrome, Antivirus)...">
+    </div>
 
-        <!-- Brauzerlər -->
-        <div class="card"><h3>6. Google Chrome</h3><p>Ən çox istifadə olunan sürətli veb brauzer.</p><a href="https://dl.google.com/chrome/install/standalonesetup64.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>7. Mozilla Firefox</h3><p>Məfhumluq və təhlükəsizlik yönümlü brauzer.</p><a href="https://www.mozilla.org/firefox/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>8. Opera GX</h3><p>Oyunçular üçün xüsusi RAM/CPU limitləmə brauzeri.</p><a href="https://www.opera.com/gx" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>9. Brave Browser</h3><p>Reklamları avtomatik bloklayan sürətli brauzer.</p><a href="https://brave.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>10. Microsoft Edge</h3><p>Windows üçün rəsmi optimallaşdırılmış brauzer.</p><a href="https://www.microsoft.com/edge" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+    <div class="grid" id="programGrid">
+        <!-- Arxiv və Fayl İdarəetməsi -->
+        <div class="card"><h3>WinRAR</h3><p>Faylları sıxlaşdırmaq və RAR/ZIP arxivlərini açmaq üçün əsas proqram.</p><a href="https://www.win-rar.com/download.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>7-Zip</h3><p>Yüksək sıxlaşdırma nisbətinə malik tamamilə pulsuz arxiv aləti.</p><a href="https://www.7-zip.org/download.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Bandizip</h3><p>Sürətli və yüngül arxivləşdirmə proqramı.</p><a href="https://www.bandisoft.com/bandizip/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>PeaZip</h3><p>Açıq mənbəli arxiv idarəetmə vasitəsi.</p><a href="https://peazip.github.io/" target="_blank" class="btn-download">Yüklə</a></div>
+
+        <!-- USB və Sistem Alətləri -->
+        <div class="card"><h3>Rufus</h3><p>Önyüklənə bilən (Bootable) USB disklər yaratmaq üçün alət.</p><a href="https://rufus.ie/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Ventoy</h3><p>Çoxsaylı ISO fayllarını bir USB-dən başlatmaq üçün alət.</p><a href="https://www.ventoy.net/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>CCleaner</h3><p>Sistem fayllarını təmizləyən və registri optimallaşdıran proqram.</p><a href="https://www.ccleaner.com/ccleaner/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Driver Booster</h3><p>Sistem drayverlərini avtomatik tapan və yeniləyən alət.</p><a href="https://www.iobit.com/en/driver-booster.php" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Revo Uninstaller</h3><p>Proqramları qalıqsız silmək üçün mükəmməl alət.</p><a href="https://www.revouninstaller.com/" target="_blank" class="btn-download">Yüklə</a></div>
+
+        <!-- Veb Brauzerlər -->
+        <div class="card"><h3>Google Chrome</h3><p>Dünyanın ən çox istifadə olunan sürətli veb brauzeri.</p><a href="https://www.google.com/chrome/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Mozilla Firefox</h3><p>Məfhumluğa və təhlükəsizliyə önəm verən veb brauzer.</p><a href="https://www.mozilla.org/firefox/new/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Opera GX</h3><p>Oyunçular üçün xüsusi RAM və CPU limitləmə funksiyalı brauzer.</p><a href="https://www.opera.com/gx" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Brave Browser</h3><p>Reklamları avtomatik bloklayan sürətli brauzer.</p><a href="https://brave.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Microsoft Edge</h3><p>Windows üçün optimallaşdırılmış rəsmi brauzer.</p><a href="https://www.microsoft.com/edge" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Tor Browser</h3><p>Tam gizlilik və anonim internet səyahəti üçün brauzer.</p><a href="https://www.torproject.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
 
         <!-- Media və Pleyerlər -->
-        <div class="card"><h3>11. VLC Media Player</h3><p>Bütün video və səs formatlarını açan güclü pleyer.</p><a href="https://get.videolan.org/vlc/3.0.20/win64/vlc-3.0.20-win64.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>12. K-Lite Codec Pack</h3><p>Bütün video kodeləri dəstəkləyən universal paket.</p><a href="https://codecguide.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>13. GOM Player</h3><p>Qabaqcıl altyazı dəstəyi olan video pleyer.</p><a href="https://www.gomlab.com/gomplayer-media-player/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>14. AIMP Audio Player</h3><p>Yüksək səs keyfiyyətli musiqi pleyeri.</p><a href="https://www.aimp.ru/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>15. Format Factory</h3><p>Video, audio və şəkil formatlarını bir-birinə çevirir.</p><a href="http://www.pcfreetime.com/formatfactory/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <div class="card"><h3>VLC Media Player</h3><p>Bütün video və audio formatlarını dəstəkləyən pleyer.</p><a href="https://www.videolan.org/vlc/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>KMPlayer</h3><p>Yüksək keyfiyyətli video oynatma proqramı.</p><a href="https://www.kmplayer.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>GOM Player</h3><p>Qabaqcıl altyazı dəstəyi olan video pleyer.</p><a href="https://www.gomlab.com/gomplayer-media-player/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>PotPlayer</h3><p>Zəngin tənzimləmə seçimləri olan güclü media pleyer.</p><a href="https://potplayer.daum.net/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>AIMP</h3><p>Yüksək səs keyfiyyətinə malik klassik musiqi pleyeri.</p><a href="https://www.aimp.ru/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>K-Lite Codec Pack</h3><p>Bütün media formatlarını açmaq üçün kodek paketi.</p><a href="https://codecguide.com/download_kl.htm" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Format Factory</h3><p>Video, audio və şəkil fayllarını çevirən proqram.</p><a href="http://www.pcfreetime.com/formatfactory/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>HandBrake</h3><p>Açıq mənbəli peşəkar video konvertor.</p><a href="https://handbrake.fr/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- Yükləmə və Torrent -->
-        <div class="card"><h3>16. Internet Download Manager</h3><p>Yükləmə sürətini maksimuma çatdıran menecer.</p><a href="https://www.internetdownloadmanager.com/download.html" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>17. uTorrent</h3><p>Torrent fayllarını yükləmək üçün proqram.</p><a href="https://www.utorrent.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>18. qBittorrent</h3><p>Reklamsız və tamamilə pulsuz Torrent klient.</p><a href="https://www.qbittorrent.org/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>19. EagleGet</h3><p>Alternativ sürətli fayl yükləmə aləti.</p><a href="http://www.eagleget.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <!-- Yükləmə Menecerləri və Torrent -->
+        <div class="card"><h3>Internet Download Manager</h3><p>Yükləmə sürətini maksimuma çatdıran proqram.</p><a href="https://www.internetdownloadmanager.com/download.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>uTorrent</h3><p>Ən populyar Torrent yükləmə müştərisi.</p><a href="https://www.utorrent.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>qBittorrent</h3><p>Reklamsız və açıq mənbəli Torrent proqramı.</p><a href="https://www.qbittorrent.org/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Free Download Manager</h3><p>Sürətli və pulsuz yükləmə idarəçisi.</p><a href="https://www.freedownloadmanager.org/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- Ünsiyyət və Sosyal -->
-        <div class="card"><h3>20. Telegram Desktop</h3><p>Kompyuter üçün sürətli və təhlükəsiz mesajlaşma.</p><a href="https://telegram.org/dl/desktop/win64" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>21. Discord</h3><p>Oyunçular üçün səsli və yazılı ünsiyyət aləti.</p><a href="https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>22. WhatsApp Desktop</h3><p>WhatsApp-ın rəsmi kompyuter proqramı.</p><a href="https://www.whatsapp.com/download" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>23. Skype</h3><p>Görüntülü və səsli zəng proqramı.</p><a href="https://www.skype.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>24. Zoom</h3><p>Onlayn konfrans və dərslər üçün proqram.</p><a href="https://zoom.us/download" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <!-- Ünsiyyət və Sosial -->
+        <div class="card"><h3>Telegram Desktop</h3><p>Masaüstü üçün sürətli mesajlaşma tətbiqi.</p><a href="https://desktop.telegram.org/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Discord</h3><p>Oyunçular üçün səsli və mətnli ünsiyyət platforması.</p><a href="https://discord.com/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>WhatsApp Desktop</h3><p>WhatsApp kompyuter tətbiqi.</p><a href="https://www.whatsapp.com/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Zoom</h3><p>Onlayn konfrans və video görüş proqramı.</p><a href="https://zoom.us/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Skype</h3><p>Görüntülü və səsli danışıq proqramı.</p><a href="https://www.skype.com/download-skype/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- Uzaqdan Bağlantı -->
-        <div class="card"><h3>25. AnyDesk</h3><p>Uzaqdan kompyuter idarəetmə və kömək proqramı.</p><a href="https://download.anydesk.com/AnyDesk.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>26. TeamViewer</h3><p>Uzaqdan masaüstü bağlantısı və fayl transferi.</p><a href="https://www.teamviewer.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <!-- Uzaqdan İdarəetmə -->
+        <div class="card"><h3>AnyDesk</h3><p>Sürətli uzaqdan masaüstü bağlantı aləti.</p><a href="https://anydesk.com/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>TeamViewer</h3><p>Uzaqdan dəstək və fayl transferi proqramı.</p><a href="https://www.teamviewer.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>RustDesk</h3><p>Açıq mənbəli alternativi uzaqdan bağlantı proqramı.</p><a href="https://rustdesk.com/" target="_blank" class="btn-download">Yüklə</a></div>
 
         <!-- Oyun Platformaları -->
-        <div class="card"><h3>27. Steam</h3><p>Rəqəmsal oyun mağazası və platforması.</p><a href="https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>28. Epic Games Launcher</h3><p>Hər həftə pulsuz oyunlar verən platforma.</p><a href="https://store.epicgames.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>29. EA App</h3><p>EA oyunları üçün rəsmi launcher.</p><a href="https://www.ea.com/ea-app" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>30. Ubisoft Connect</h3><p>Ubisoft oyun platforması.</p><a href="https://ubisoftconnect.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <div class="card"><h3>Steam</h3><p>Ən böyük rəqəmsal oyun mağazası və platforması.</p><a href="https://store.steampowered.com/about/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Epic Games Launcher</h3><p>Hər həftə pulsuz oyunlar təqdim edən platforma.</p><a href="https://store.epicgames.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>EA App</h3><p>Electronic Arts oyun platforması.</p><a href="https://www.ea.com/ea-app" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Ubisoft Connect</h3><p>Ubisoft oyunlarının idarəetmə mərkəzi.</p><a href="https://ubisoftconnect.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>GOG Galaxy</h3><p>Bütün oyun platformalarınızı bir yerə toplayan alət.</p><a href="https://www.gog.com/galaxy" target="_blank" class="btn-download">Yüklə</a></div>
 
         <!-- Təhlükəsizlik və Antivirus -->
-        <div class="card"><h3>31. Malwarebytes</h3><p>Zərərli proqramları və virusları təmizləyir.</p><a href="https://www.malwarebytes.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>32. Avast Free Antivirus</h3><p>Pulsuz əsas antivirus qoruması.</p><a href="https://www.avast.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>33. Kaspersky Free</h3><p>Güclü və pulsuz antivirus sistemi.</p><a href="https://www.kaspersky.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <div class="card"><h3>Malwarebytes</h3><p>Zərərli proqramları və spayverləri təmizləyən alət.</p><a href="https://www.malwarebytes.com/mwb-download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Avast Free Antivirus</h3><p>Gündəlik istifadə üçün pulsuz antivirus.</p><a href="https://www.avast.com/free-antivirus-download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Kaspersky Free</h3><p>Güclü bulud əsaslı pulsuz antivirus.</p><a href="https://www.kaspersky.com/downloads" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>AdwCleaner</h3><p>İstenməyən reklam və brauzer zibillərini təmizləyir.</p><a href="https://www.malwarebytes.com/adwcleaner" target="_blank" class="btn-download">Yüklə</a></div>
 
         <!-- Kodlaşdırma və Mətn -->
-        <div class="card"><h3>34. Notepad++</h3><p>İnkişaf etmiş kod və mətn redaktoru.</p><a href="https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.2/npp.8.6.2.Installer.x64.exe" download class="btn-download">Birbaşa Yüklə (.exe)</a></div>
-        <div class="card"><h3>35. Visual Studio Code</h3><p>Proqramçılar üçün ən populyar kod redaktoru.</p><a href="https://code.visualstudio.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>36. Sublime Text</h3><p>Sürətli və yüngül kod redaktoru.</p><a href="https://www.sublimetext.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <div class="card"><h3>Notepad++</h3><p>İnkişaf etmiş mətn və kod redaktoru.</p><a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Visual Studio Code</h3><p>Proqramçılar üçün ən universal kod mühiti.</p><a href="https://code.visualstudio.com/Download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Sublime Text</h3><p>Çox sürətli və yüngül mətn redaktoru.</p><a href="https://www.sublimetext.com/download" target="_blank" class="btn-download">Yüklə</a></div>
 
         <!-- Qrafika və Dizayn -->
-        <div class="card"><h3>37. GIMP</h3><p>Photoshop alternativ pulsuz foto redaktoru.</p><a href="https://www.gimp.org/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>38. Paint.NET</h3><p>Sadə və istifadəsi rahat şəkil redaktoru.</p><a href="https://www.getpaint.net/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>39. Blender</h3><p>3D modelləmə və animasiya proqramı.</p><a href="https://www.blender.org/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>40. Inkscape</h3><p>Vektor qrafika redaktoru (CorelDRAW alternativi).</p><a href="https://inkscape.org/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <div class="card"><h3>GIMP</h3><p>Photoshop alternativ pulsuz foto redaktoru.</p><a href="https://www.gimp.org/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Paint.NET</h3><p>Sadə və istifadəsi rahat şəkil redaktoru.</p><a href="https://www.getpaint.net/download.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Blender</h3><p>Peşəkar 3D modelləmə və animasiya proqramı.</p><a href="https://www.blender.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Krita</h3><p>Rəssamlar və illüstratorlar üçün çizim proqramı.</p><a href="https://krita.org/en/download/krita-desktop/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Inkscape</h3><p>Vektor qrafika redaktoru.</p><a href="https://inkscape.org/release/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- Ekran Qeydi və Səs -->
-        <div class="card"><h3>41. OBS Studio</h3><p>Canlı yayın və ekran qeydi proqramı.</p><a href="https://obsproject.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>42. FastStone Capture</h3><p>Ekran fotosu və kiçik videolar almaq aləti.</p><a href="https://www.faststone.org/FSCaptureDetail.htm" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>43. Audacity</h3><p>Pulsuz səs yazma və redaktə etmə proqramı.</p><a href="https://www.audacityteam.org/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>44. Bandicam</h3><p>Oyun və ekran videosu çəkən proqram.</p><a href="https://www.bandicam.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <!-- Ekran Qeydi və Audio -->
+        <div class="card"><h3>OBS Studio</h3><p>Canlı yayın və peşəkar ekran qeydi proqramı.</p><a href="https://obsproject.com/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>FastStone Capture</h3><p>Ekran görüntüləri və video almaq üçün yüngül alət.</p><a href="https://www.faststone.org/FSCaptureDetail.htm" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Audacity</h3><p>Pulsuz səs yazma və redaktə etmə aləti.</p><a href="https://www.audacityteam.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Bandicam</h3><p>Oyun və yüksək keyfiyyətli ekran qeydi aləti.</p><a href="https://www.bandicam.com/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- Sistem Məlumatı və PDF -->
-        <div class="card"><h3>45. CPU-Z</h3><p>Prosessor, RAM və plata haqqında məlumat.</p><a href="https://www.cpuid.com/softwares/cpu-z.html" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>46. HWMonitor</h3><p>Kompyuterin temperatur və voltaj göstəriciləri.</p><a href="https://www.cpuid.com/softwares/hwmonitor.html" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>47. Foxit PDF Reader</h3><p>Sürətli PDF sənəd oxuyucu proqram.</p><a href="https://www.foxit.com/pdf-reader/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>48. Adobe Acrobat Reader</h3><p>Rəsmi PDF oxuyucu alət.</p><a href="https://get.adobe.com/reader/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>49. Spotify</h3><p>Musiqi və podkast dinləmə platforması.</p><a href="https://www.spotify.com/download/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
-        <div class="card"><h3>50. Everything (Voidtools)</h3><p>Faylları kompyuter daxilində anında tapır.</p><a href="https://www.voidtools.com/" target="_blank" class="btn-download">Yükləmə Səhifəsi</a></div>
+        <!-- Sistem İzləmə və Diaqnostika -->
+        <div class="card"><h3>CPU-Z</h3><p>Prosessor və sistem avadanlığı haqqında məlumat aləti.</p><a href="https://www.cpuid.com/softwares/cpu-z.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>GPU-Z</h3><p>Videokart haqqında detallı texniki məlumat aləti.</p><a href="https://www.techpowerup.com/gpuz/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>HWMonitor</h3><p>Temperatur və voltaj göstəricilərini izləmə aləti.</p><a href="https://www.cpuid.com/softwares/hwmonitor.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>CrystalDiskInfo</h3><p>Sərt disklərin (HDD/SSD) sağlamlığını göstərir.</p><a href="https://crystalmark.info/en/software/crystaldiskinfo/" target="_blank" class="btn-download">Yüklə</a></div>
+
+        <!-- PDF və Ofis -->
+        <div class="card"><h3>Foxit PDF Reader</h3><p>Sürətli PDF sənəd oxuyucu proqramı.</p><a href="https://www.foxit.com/pdf-reader/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Adobe Acrobat Reader</h3><p>Rəsmi PDF oxuma aləti.</p><a href="https://get.adobe.com/reader/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>LibreOffice</h3><p>Microsoft Office-in pulsuz tam alternativi.</p><a href="https://www.libreoffice.org/download/download/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>WPS Office</h3><p>Müasir görünüşlü ofis proqramlar paketi.</p><a href="https://www.wps.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
+
+        <!-- Fayl Axtarışı və Digər -->
+        <div class="card"><h3>Everything</h3><p>Faylları kompyuter daxilində anında tapır.</p><a href="https://www.voidtools.com/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>Spotify</h3><p>Musiqi dinləmə platforması.</p><a href="https://www.spotify.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
 
     </div>
 </div>
@@ -121,6 +151,23 @@
 <footer>
     <p>&copy; 2026 LABIRENT CLUB. Bütün hüquqlar qorunur.</p>
 </footer>
+
+<script>
+// Canlı Axtarış Skripti
+function filterPrograms() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.getElementsByClassName('card');
+
+    for (let i = 0; i < cards.length; i++) {
+        let cardText = cards[i].innerText.toLowerCase();
+        if (cardText.includes(input)) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
 
 </body>
 </html>
