@@ -5,89 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Haqqımızda - LABIRENT CLUB</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { 
-      background-color: #0b1120; 
-      color: #f8fafc; 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0b1120;
+      color: #f8fafc;
       font-family: Arial, sans-serif;
-      line-height: 1.6;
     }
 
-    .container { 
-      max-width: 800px; 
-      margin: 50px auto; 
-      padding: 20px; 
+    /* LABIRENT CLUB Header */
+    .header {
+      background-color: #0f172a;
+      text-align: center;
+      padding: 25px 10px;
     }
 
-    /* Ana səhifəyə qayıtmaq üçün keçid linki */
-    .back-link {
-      display: inline-block;
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: bold;
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
-    .back-link:hover { text-decoration: underline; }
-
-    .page-title {
+    .header h1 {
       color: #ffffff;
-      font-size: 32px;
-      margin-bottom: 25px;
-      border-bottom: 2px solid #1e293b;
-      padding-bottom: 10px;
+      font-size: 26px;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
     }
 
-    .box {
+    .header p {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    /* Mavi Navibar */
+    .navbar {
+      background-color: #0284c7;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .nav-btn {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background-color: #0369a1;
+    }
+
+    /* Konteyner */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .about-card {
       background-color: #1e293b;
       border: 1px solid #334155;
       padding: 25px;
-      border-radius: 10px;
+      border-radius: 8px;
       margin-bottom: 20px;
     }
 
-    .box h2 { 
-      color: #38bdf8; 
-      font-size: 20px; 
-      margin-bottom: 12px; 
+    .about-card h2 {
+      color: #38bdf8;
+      font-size: 20px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #0284c7;
+      display: inline-block;
+      padding-bottom: 4px;
     }
 
-    .box p { 
-      color: #cbd5e1; 
-      font-size: 15px; 
-      margin-bottom: 10px; 
+    .about-card p {
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 10px;
     }
 
-    .box p:last-child { margin-bottom: 0; }
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
 
-    /* Məsuliyyətdən İmtina / Xəbərdarlıq Qutusu */
+    .about-card strong {
+      color: #38bdf8;
+    }
+
+    /* Məsuliyyətdən İmtina / Disclaimer */
     .disclaimer-box {
       background-color: rgba(239, 68, 68, 0.1);
-      border-left: 4px solid #ef4444;
+      border: 1px solid #ef4444;
+      border-left: 5px solid #ef4444;
       padding: 15px 20px;
       border-radius: 6px;
-      margin-top: 30px;
+      margin-top: 25px;
     }
 
-    .disclaimer-box p { 
-      color: #f87171; 
-      font-size: 13px; 
-      margin: 0; 
+    .disclaimer-box p {
+      color: #f87171;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .disclaimer-box strong {
+      color: #fca5a5;
     }
   </style>
 </head>
 <body>
 
+  <!-- Başlıq -->
+  <div class="header">
+    <h1>LABIRENT CLUB</h1>
+    <p>Rəqəmsal Yükləmə Mərkəzi</p>
+  </div>
+
+  <!-- Navibar (Keçid düymələri) -->
+  <div class="navbar">
+    <a href="index.html" class="nav-btn">PC Programları</a>
+    <a href="index.html" class="nav-btn">PS3 Bölməsi</a>
+    <a href="haqqimizda.html" class="nav-btn active">Haqqımızda</a>
+  </div>
+
+  <!-- Əsas Məzmun -->
   <div class="container">
     
-    <!-- Ana səhifəyə qaytaracaq link -->
-    <a href="index.html" class="back-link">← Ana Səhifəyə Qayıt</a>
-
-    <h1 class="page-title">Haqqımızda</h1>
-
-    <!-- Haqqımızda Mətni -->
-    <div class="box">
-      <h2>Biz Kimik?</h2>
+    <div class="about-card">
+      <h2>Haqqımızda</h2>
       <p>
         Biz uzun illərdir texnologiya, proqramlaşdırma, aparat təminatı (hardware) və server idarəçiliyi sahəsində fasiləsiz fəaliyyət göstərən komandayıq. Fəaliyyət illərimiz ərzində kompüter və oyun konsollarının təmiri, xüsusi Telegram botlarının yazılması və server modifikasiyaları sahəsində zəngin praktiki təcrübə toplamışıq.
       </p>
@@ -96,8 +148,7 @@
       </p>
     </div>
 
-    <!-- Məqsəd və Missiya -->
-    <div class="box">
+    <div class="about-card">
       <h2>Məqsədimiz və Missiyamız</h2>
       <p>
         <strong>Məqsədimiz:</strong> Saytımızda istifadəçilərə ən faydalı proqramları, texnoloji yenilikləri və xidmətləri rahat, sürətli və vahid bir ünvanda təqdim etməkdir.
@@ -107,7 +158,7 @@
       </p>
     </div>
 
-    <!-- Məsuliyyətdən İmtina -->
+    <!-- Məsuliyyətdən İmtina Bölməsi -->
     <div class="disclaimer-box">
       <p>
         <strong>Məsuliyyətdən İmtina:</strong> Bu siteden başka sitelere link olarak çeşitli programlar yer almaktadır. Sitemiz, link verilen bu programların içeriğinden, programı kullanmanızdan ötürü meydana gelecek problemlerden hiçbir şekilde sorumlu değildir.
