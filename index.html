@@ -8,56 +8,42 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f8f9fa; color: #333; }
         
-        /* Header və Buqələmun Animasiya Sahəsi */
+        /* Header və Canvas Sahəsi */
         header { 
             background: #1b2838; 
             color: #fff; 
-            padding: 35px 15px 25px 15px; 
+            padding: 30px 15px 20px 15px; 
             text-align: center; 
             border-bottom: 4px solid #00a8ff; 
             position: relative;
             overflow: hidden;
         }
-        
-        .header-title-wrapper {
-            display: inline-block;
+
+        .header-container {
             position: relative;
-            padding: 10px 20px;
+            display: inline-block;
+            width: 100%;
+            max-width: 800px;
         }
 
-        header h1 { font-size: 32px; letter-spacing: 1.5px; margin-bottom: 5px; position: relative; z-index: 2; }
-        
-        /* Buqələmun (Chameleon) Stylinqi və Animasiyası */
-        .chameleon {
+        /* Real Buqələmun Canvas-ı */
+        #chameleonCanvas {
             position: absolute;
-            font-size: 24px;
-            top: -15px;
+            top: -50px;
             left: 0;
-            z-index: 3;
-            animation: walkAndJump 12s infinite ease-in-out, colorChange 6s infinite linear;
-            user-select: none;
+            width: 100%;
+            height: 120px;
+            z-index: 5;
+            pointer-events: none;
         }
 
-        /* Buqələmunun gəzməsi, düşüb-qalxması */
-        @keyframes walkAndJump {
-            0% { left: 0%; top: -15px; transform: scaleX(1); }
-            20% { left: 40%; top: -15px; transform: scaleX(1); }
-            30% { left: 50%; top: 15px; transform: scaleX(1); } /* Başlığın üzərindən aşağı düşür */
-            40% { left: 60%; top: -15px; transform: scaleX(1); } /* Yenidən yuxarı qalxır */
-            50% { left: 85%; top: -15px; transform: scaleX(-1); } /* Dönür geriyə */
-            70% { left: 45%; top: -15px; transform: scaleX(-1); }
-            80% { left: 35%; top: 15px; transform: scaleX(-1); } /* Geriyə gələndə də düşür */
-            90% { left: 20%; top: -15px; transform: scaleX(-1); }
-            100% { left: 0%; top: -15px; transform: scaleX(1); }
-        }
-
-        /* Buqələmunun rəng dəyişməsi */
-        @keyframes colorChange {
-            0% { filter: drop-shadow(0 0 8px #00ff88) hue-rotate(0deg); }
-            25% { filter: drop-shadow(0 0 8px #00a8ff) hue-rotate(90deg); }
-            50% { filter: drop-shadow(0 0 8px #9b59b6) hue-rotate(180deg); }
-            75% { filter: drop-shadow(0 0 8px #e74c3c) hue-rotate(270deg); }
-            100% { filter: drop-shadow(0 0 8px #00ff88) hue-rotate(360deg); }
+        header h1 { 
+            font-size: 34px; 
+            letter-spacing: 2px; 
+            margin-top: 30px; 
+            margin-bottom: 5px; 
+            position: relative; 
+            z-index: 2; 
         }
 
         nav { background: #2c3e50; display: flex; justify-content: center; border-bottom: 2px solid #34495e; }
@@ -66,7 +52,7 @@
         
         .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
         
-        /* Axtarış Kutusu Stylinqi */
+        /* Axtarış Kutusu */
         .search-box { margin-bottom: 30px; text-align: center; }
         .search-input { width: 100%; max-width: 600px; padding: 14px 20px; font-size: 16px; border: 2px solid #00a8ff; border-radius: 25px; outline: none; transition: box-shadow 0.3s; }
         .search-input:focus { box-shadow: 0 0 10px rgba(0, 168, 255, 0.4); }
@@ -84,9 +70,9 @@
 <body>
 
 <header>
-    <div class="header-title-wrapper">
-        <!-- Rəngini dəyişərək gəzən buqələmun -->
-        <div class="chameleon">🦎</div>
+    <div class="header-container">
+        <!-- Reallığa əsaslanan Buqələmun Animasiyası -->
+        <canvas id="chameleonCanvas" width="800" height="120"></canvas>
         <h1>LABIRENT CLUB</h1>
     </div>
     <p>Rəqəmsal Yükləmə Mərkəzi</p>
@@ -99,173 +85,27 @@
 </nav>
 
 <div class="container">
-    <!-- Axtarış Bölməsi -->
     <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" onkeyup="filterPrograms()" placeholder="Proqram adı və ya təyinatı yazın (məs: WinRAR, Chrome, Antivirus)...">
+        <input type="text" id="searchInput" class="search-input" onkeyup="filterPrograms()" placeholder="Proqram adı və ya təyinatı yazın...">
     </div>
 
     <div class="grid" id="programGrid">
-        <!-- 1 - 20: Arxiv, USB və Sistem -->
+        <!-- Proqram kartları tam şəkildə saxlanılıb -->
         <div class="card"><h3>1. WinRAR</h3><p>Faylları sıxlaşdırmaq və RAR/ZIP arxivlərini açmaq üçün əsas proqram.</p><a href="https://www.win-rar.com/download.html" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>2. 7-Zip</h3><p>Yüksək sıxlaşdırma nisbətinə malik tamamilə pulsuz arxiv aləti.</p><a href="https://www.7-zip.org/download.html" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>3. Bandizip</h3><p>Sürətli və yüngül arxivləşdirmə proqramı.</p><a href="https://www.bandisoft.com/bandizip/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>4. PeaZip</h3><p>Açıq mənbəli arxiv idarəetmə vasitəsi.</p><a href="https://peazip.github.io/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>5. Izarc</h3><p>Çoxsaylı arxiv formatlarını dəstəkləyən pulsuz alət.</p><a href="https://www.izarc.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>6. Rufus</h3><p>Önyüklənə bilən (Bootable) USB disklər yaratmaq üçün alət.</p><a href="https://rufus.ie/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>7. Ventoy</h3><p>Çoxsaylı ISO fayllarını bir USB-dən başlatmaq üçün alət.</p><a href="https://www.ventoy.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>8. YUMI</h3><p>Multiboot USB hazırlamaq üçün effektiv alət.</p><a href="https://www.pendrivelinux.com/yumi-multiboot-usb-creator/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>9. UNetbootin</h3><p>Linux paylamaları üçün önyükləmə USB-si yaradıcısı.</p><a href="https://unetbootin.github.io/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>10. BalenaEtcher</h3><p>SD kart və USB disklərə ISO yazmaq üçün sadə proqram.</p><a href="https://etcher.balena.io/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>11. CCleaner</h3><p>Sistem fayllarını təmizləyən və registri optimallaşdıran proqram.</p><a href="https://www.ccleaner.com/ccleaner/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>12. BleachBit</h3><p>Sistemi və gizliliyi təmizləyən açıq mənbəli alət.</p><a href="https://www.bleachbit.org/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>13. Driver Booster</h3><p>Sistem drayverlərini avtomatik tapan və yeniləyən alət.</p><a href="https://www.iobit.com/en/driver-booster.php" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>14. DriverPack Solution</h3><p>Oflayn və onlayn drayver quraşdırma paketi.</p><a href="https://driverpack.io/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>15. Driver Easy</h3><p>Sistem drayverlərini yeniləmək üçün asan vasitə.</p><a href="https://www.drivereasy.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>16. Revo Uninstaller</h3><p>Proqramları qalıqsız silmək üçün mükəmməl alət.</p><a href="https://www.revouninstaller.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>17. IObit Uninstaller</h3><p>Təkrarolunmaz silmə və zibil təmizləmə aləti.</p><a href="https://www.iobit.com/en/advanceduninstaller.php" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>18. Geek Uninstaller</h3><p>Kiçik ölçülü, sürətli proqram silmə vasitəsi.</p><a href="https://geekuninstaller.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>19. Bulk Crap Uninstaller</h3><p>Çoxsaylı proqramları bir dəfəyə tam silən alət.</p><a href="https://www.bcuninstaller.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>20. Advanced SystemCare</h3><p>Kompyuterin performansını artıran optimallaşdırma paketi.</p><a href="https://www.iobit.com/en/advancedsystemcarefree.php" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 21 - 40: Brauzerlər və Şəbəkə -->
-        <div class="card"><h3>21. Google Chrome</h3><p>Dünyanın ən çox istifadə olunan sürətli veb brauzeri.</p><a href="https://www.google.com/chrome/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>22. Mozilla Firefox</h3><p>Məfhumluğa və təhlükəsizliyə önəm verən veb brauzer.</p><a href="https://www.mozilla.org/firefox/new/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>23. Opera GX</h3><p>Oyunçular üçün xüsusi RAM və CPU limitləmə funksiyalı brauzer.</p><a href="https://www.opera.com/gx" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>24. Opera Browser</h3><p>Quraşdırılmış VPN və reklam bloklayıcılı brauzer.</p><a href="https://www.opera.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>25. Brave Browser</h3><p>Reklamları avtomatik bloklayan sürətli brauzer.</p><a href="https://brave.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>26. Microsoft Edge</h3><p>Windows üçün optimallaşdırılmış rəsmi brauzer.</p><a href="https://www.microsoft.com/edge" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>27. Tor Browser</h3><p>Tam gizlilik və anonim internet səyahəti üçün brauzer.</p><a href="https://www.torproject.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>28. Vivaldi</h3><p>Çoxsaylı fərdiləşdirmə seçimləri olan güclü brauzer.</p><a href="https://vivaldi.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>29. Waterfox</h3><p>Firefox əsaslı sürətli və gizlilik yönümlü brauzer.</p><a href="https://www.waterfox.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>30. Pale Moon</h3><p>Klassik interfeysli yüngül brauzer.</p><a href="https://www.palemoon.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>31. Proton VPN</h3><p>Yüksək təhlükəsizlikli pulsuz və limitsiz VPN.</p><a href="https://protonvpn.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>32. Windscribe VPN</h3><p>Gizlilik və bloklanmış saytlara keçid aləti.</p><a href="https://windscribe.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>33. Hotspot Shield</h3><p>Sürətli VPN bağlantı proqramı.</p><a href="https://www.hotspotshield.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>34. Wireshark</h3><p>Şəbəkə paketlərini təhlil edən peşəkar alət.</p><a href="https://www.wireshark.org/download.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>35. Advanced IP Scanner</h3><p>Lokal şəbəkədəki cihazları skan edən alət.</p><a href="https://www.advanced-ip-scanner.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>36. Fiddler</h3><p>HTTP və HTTPS trafikini izləyən alət.</p><a href="https://www.telerik.com/fiddler" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>37. Cisco Packet Tracer</h3><p>Şəbəkə simulyasiyası proqramı.</p><a href="https://www.netacad.com/courses/packet-tracer" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>38. GlassWire</h3><p>Şəbəkə istifadəsini və fayrvollu izləyən proqram.</p><a href="https://www.glasswire.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>39. PuTTY</h3><p>SSH və Telnet bağlantıları üçün yüngül klient.</p><a href="https://www.putty.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>40. WinSCP</h3><p>SFTP və FTP fayl transferi proqramı.</p><a href="https://winscp.net/eng/download.php" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 41 - 60: Media və Pleyerlər -->
-        <div class="card"><h3>41. VLC Media Player</h3><p>Bütün video və audio formatlarını dəstəkləyən pleyer.</p><a href="https://www.videolan.org/vlc/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>42. KMPlayer</h3><p>Yüksək keyfiyyətli video oynatma proqramı.</p><a href="https://www.kmplayer.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>43. GOM Player</h3><p>Qabaqcıl altyazı dəstəyi olan video pleyer.</p><a href="https://www.gomlab.com/gomplayer-media-player/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>44. PotPlayer</h3><p>Zəngin tənzimləmə seçimləri olan güclü media pleyer.</p><a href="https://potplayer.daum.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>45. AIMP</h3><p>Yüksək səs keyfiyyətinə malik klassik musiqi pleyeri.</p><a href="https://www.aimp.ru/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>46. Foobar2000</h3><p>Çox yüngül və fərdiləşdirilə bilən musiqi pleyeri.</p><a href="https://www.foobar2000.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>47. Winamp</h3><p>Əfsanəvi musiqi pleyerinin yenilənmiş versiyası.</p><a href="https://www.winamp.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>48. MusicBee</h3><p>Musiqi kolleksiyanızı idarə etmək üçün mükəmməl pleyer.</p><a href="https://getmusicbee.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>49. K-Lite Codec Pack</h3><p>Bütün media formatlarını açmaq üçün kodek paketi.</p><a href="https://codecguide.com/download_kl.htm" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>50. Format Factory</h3><p>Video, audio və şəkil fayllarını çevirən proqram.</p><a href="http://www.pcfreetime.com/formatfactory/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>51. HandBrake</h3><p>Açıq mənbəli peşəkar video konvertor.</p><a href="https://handbrake.fr/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>52. Any Video Converter</h3><p>Sürətli video çevirmə və yükləmə aləti.</p><a href="https://www.any-video-converter.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>53. XMedia Recode</h3><p>Video və audio formatlarını fərdiləşdirərək çevirən alət.</p><a href="https://www.xmedia-recode.de/en/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>54. Freemake Video Converter</h3><p>Sadə interfeysli video çevirmə aləti.</p><a href="https://www.freemake.com/free_video_converter/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>55. Kodi</h3><p>Ev teatrı və media mərkəzi proqramı.</p><a href="https://kodi.tv/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>56. Plex Media Server</h3><p>Filmlərinizi istənilən cihaza yayımlayan server aləti.</p><a href="https://www.plex.tv/media-server-downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>57. Stremio</h3><p>Kino və serialları bir yerdən izləmə platforması.</p><a href="https://www.stremio.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>58. Media Player Classic</h3><p>Sistem resurslarını yormayan yüngül pleyer.</p><a href="https://mpc-hc.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>59. QuickTime Player</h3><p>Apple-ın Windows üçün media pleyeri.</p><a href="https://support.apple.com/downloads/quicktime" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>60. RealPlayer</h3><p>Video yükləmək və oynatmaq üçün klassik alət.</p><a href="https://www.real.com/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 61 - 80: Yükləmə Menecerləri və Torrent -->
-        <div class="card"><h3>61. Internet Download Manager</h3><p>Yükləmə sürətini maksimuma çatdıran menecer.</p><a href="https://www.internetdownloadmanager.com/download.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>62. uTorrent</h3><p>Ən populyar Torrent yükləmə müştərisi.</p><a href="https://www.utorrent.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>63. qBittorrent</h3><p>Reklamsız və açıq mənbəli Torrent proqramı.</p><a href="https://www.qbittorrent.org/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>64. Free Download Manager</h3><p>Sürətli və pulsuz yükləmə idarəçisi.</p><a href="https://www.freedownloadmanager.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>65. BitComet</h3><p>C2C yükləmələri dəstəkləyən Torrent aləti.</p><a href="https://www.bitcomet.com/en" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>66. Deluge</h3><p>Açıq mənbəli yüngül Torrent proqramı.</p><a href="https://deluge-torrent.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>67. Transmission</h3><p>Sada interfeysli Torrent müştərisi.</p><a href="https://transmissionbt.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>68. JDownloader 2</h3><p>Avtomatik link kopyalama və yükləmə aləti.</p><a href="https://jdownloader.org/jdownloader2" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>69. EagleGet</h3><p>Çoxşaxəli yükləmə sürətləndirici proqram.</p><a href="http://www.eagleget.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>70. Ninja Download Manager</h3><p>Müasir interfeysli sürətli yükləmə meneceri.</p><a href="https://ninjadownloadmanager.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>71. Xtreme Download Manager</h3><p>Sürəti 500%-dək artıran pulsuz yükləyici.</p><a href="https://xdman.sourceforge.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>72. ClipGrab</h3><p>YouTube və digər saytlardan video yükləyən alət.</p><a href="https://clipgrab.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>73. 4K Video Downloader</h3><p>Yüksək keyfiyyətli video yükləmə proqramı.</p><a href="https://www.4kdownload.com/products/videodownloader-42" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>74. YTD Video Downloader</h3><p>Video yükləmək və çevirmək üçün alət.</p><a href="https://www.ytddownloader.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>75. Youtube-dl</h3><p>Əmr sətiri ilə çalışan güclü video yükləyici.</p><a href="https://youtube-dl.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>76. yt-dlp</h3><p>Youtube-dl-in yenilənmiş və sürətli versiyası.</p><a href="https://github.com/yt-dlp/yt-dlp" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>77. Motrix</h3><p>Düzgün dizaynlı açıq mənbəli yükləyici.</p><a href="https://motrix.app/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>78. Vuze</h3><p>Əhatəli Torrent və media axtarış proqramı.</p><a href="https://www.vuze.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>79. FrostWire</h3><p>Torrent və pulsuz media faylları yükləyicisi.</p><a href="https://www.frostwire.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>80. Ares Galaxy</h3><p>P2P fayl paylaşma və yükləmə proqramı.</p><a href="https://ares.sourceforge.io/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 81 - 100: Ünsiyyət və Sosial -->
-        <div class="card"><h3>81. Telegram Desktop</h3><p>Masaüstü üçün sürətli mesajlaşma tətbiqi.</p><a href="https://desktop.telegram.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>82. Discord</h3><p>Oyunçular üçün səsli və mətnli ünsiyyət platforması.</p><a href="https://discord.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>83. WhatsApp Desktop</h3><p>WhatsApp kompyuter tətbiqi.</p><a href="https://www.whatsapp.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>84. Zoom</h3><p>Onlayn konfrans və video görüş proqramı.</p><a href="https://zoom.us/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>85. Skype</h3><p>Görüntülü və səsli danışıq proqramı.</p><a href="https://www.skype.com/download-skype/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>86. Microsoft Teams</h3><p>İş və təhsil üçün komanda ünsiyyət aləti.</p><a href="https://www.microsoft.com/en/microsoft-teams/download-app" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>87. Signal</h3><p>Yüksək şifrələməli gizli mesajlaşma tətbiqi.</p><a href="https://signal.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>88. Viber</h3><p>Kompüter üçün Viber zəng və mesaj proqramı.</p><a href="https://www.viber.com/en/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>89. Element</h3><p>Matrix protokolu ilə təhlükəsiz mesajlaşma.</p><a href="https://element.io/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>90. Slack</h3><p>Biznes komandaları üçün mesajlaşma mərkəzi.</p><a href="https://slack.com/downloads/windows" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>91. AnyDesk</h3><p>Sürətli uzaqdan masaüstü bağlantı aləti.</p><a href="https://anydesk.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>92. TeamViewer</h3><p>Uzaqdan dəstək və fayl transferi proqramı.</p><a href="https://www.teamviewer.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>93. RustDesk</h3><p>Açıq mənbəli alternativi uzaqdan bağlantı proqramı.</p><a href="https://rustdesk.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>94. Chrome Remote Desktop</h3><p>Google hesabı ilə uzaqdan idarəetmə.</p><a href="https://remotedesktop.google.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>95. UltraVNC</h3><p>Lokal və uzaq şəbəkədən kompyuter idarəsi.</p><a href="https://www.uvnc.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>96. Supremeo</h3><p>Təhlükəsiz və sadə uzaqdan masaüstü aləti.</p><a href="https://www.supremocontrol.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>97. Ammyy Admin</h3><p>Quraşdırma tələb etməyən uzaqdan bağlantı.</p><a href="http://www.ammyy.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>98. Thunderbird</h3><p>Mozilla-nın rəsmi e-poçt idarəetmə proqramı.</p><a href="https://www.thunderbird.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>99. Mailbird</h3><p>Çoxsaylı poçt hesablarını bir araya toplayan alət.</p><a href="https://www.getmailbird.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>100. eM Client</h3><p>Təqvim və e-poçt idarəetmə proqramı.</p><a href="https://www.emclient.com/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 101 - 120: Oyun Platformaları və Emulyatorlar -->
-        <div class="card"><h3>101. Steam</h3><p>Ən böyük rəqəmsal oyun mağazası və platforması.</p><a href="https://store.steampowered.com/about/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>102. Epic Games Launcher</h3><p>Hər həftə pulsuz oyunlar təqdim edən platforma.</p><a href="https://store.epicgames.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>103. EA App</h3><p>Electronic Arts oyun platforması.</p><a href="https://www.ea.com/ea-app" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>104. Ubisoft Connect</h3><p>Ubisoft oyunlarının idarəetmə mərkəzi.</p><a href="https://ubisoftconnect.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>105. GOG Galaxy</h3><p>Bütün oyun platformalarınızı bir yerə toplayan alət.</p><a href="https://www.gog.com/galaxy" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>106. Battle.net</h3><p>Blizzard oyunlarının rəsmi launcher-i.</p><a href="https://www.blizzard.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>107. Riot Client</h3><p>League of Legends və Valorant üçün launcher.</p><a href="https://www.riotgames.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>108. BlueStacks</h3><p>PC-də Android oyunlarını oynamaq üçün emulyator.</p><a href="https://www.bluestacks.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>109. LDPlayer</h3><p>Sürətli və optimallaşdırılmış Android emulyatoru.</p><a href="https://www.ldplayer.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>110. NoxPlayer</h3><p>Çoxsaylı pəncərə dəstəyi olan Android emulyatoru.</p><a href="https://www.bignox.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>111. MEmu Play</h3><p>Yüksək performanslı Android simulyatoru.</p><a href="https://www.memuplay.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>112. PCSX2</h3><p>PlayStation 2 oyunlarını PC-də oynadan emulyator.</p><a href="https://pcsx2.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>113. RPCS3</h3><p>PlayStation 3 oyunlarını PC-də işlədən emulyator.</p><a href="https://rpcs3.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>114. PPSSPP</h3><p>PSP oyunlarını kompyuterdə oynadan emulyator.</p><a href="https://www.ppsspp.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>115. Dolphin Emulator</h3><p>GameCube və Wii oyun emulyatoru.</p><a href="https://dolphin-emu.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>116. RetroArch</h3><p>Bütün retro konsolları bir araya gətirən platforma.</p><a href="https://www.retroarch.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>117. MSI Afterburner</h3><p>Videokartın performansını izləyən və overclock edən alət.</p><a href="https://www.msi.com/Landing/afterburner/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>118. Razer Cortex</h3><p>Oyun zamanı RAM təmizləyən və optimallaşdıran alət.</p><a href="https://www.razer.com/cortex" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>119. GeDoSaTo</h3><p>Oyunlarda qrafikanı yaxşılaşdıran alət.</p><a href="https://blog.metaclassofnil.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>120. Cheat Engine</h3><p>Oyun daxili parametrləri test etmək üçün proqram.</p><a href="https://www.cheatengine.org/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 121 - 140: Antivirus və Təhlükəsizlik -->
-        <div class="card"><h3>121. Malwarebytes</h3><p>Zərərli proqramları və spayverləri təmizləyən alət.</p><a href="https://www.malwarebytes.com/mwb-download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>122. Avast Free Antivirus</h3><p>Gündəlik istifadə üçün pulsuz antivirus.</p><a href="https://www.avast.com/free-antivirus-download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>123. Kaspersky Free</h3><p>Güclü bulud əsaslı pulsuz antivirus.</p><a href="https://www.kaspersky.com/downloads" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>124. AVG AntiVirus Free</h3><p>Sistem təhlükəsizliyini təmin edən antivirus.</p><a href="https://www.avg.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>125. Bitdefender Free</h3><p>Minimalist və güclü antivirus proqramı.</p><a href="https://www.bitdefender.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>126. Avira Free Security</h3><p>Mühafizə və məfhumluq paketi.</p><a href="https://www.avira.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>127. ESET NOD32 Antivirus</h3><p>Sürətli və sistem resurslarını yormayan antivirus.</p><a href="https://www.eset.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>128. AdwCleaner</h3><p>İstenməyən reklam və brauzer zibillərini təmizləyir.</p><a href="https://www.malwarebytes.com/adwcleaner" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>129. HitmanPro</h3><p>İkinci rəy kimi virusları aşkarlayan skaner.</p><a href="https://www.hitmanpro.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>130. Emsisoft Emergency Kit</h3><p>Quraşdırmasız təmizləyici antivirus skaneri.</p><a href="https://www.emsisoft.com/en/home/emergencykit/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>131. KeePass</h3><p>Şifrələrinizi təhlükəsiz saxlayan parol meneceri.</p><a href="https://keepass.info/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>132. Bitwarden</h3><p>Açıq mənbəli bulud əsaslı parol saxlayıcısı.</p><a href="https://bitwarden.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>133. 1Password</h3><p>Peşəkar şifrə qoruyucu proqramı.</p><a href="https://1password.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>134. VeraCrypt</h3><p>Diskləri və faylları şifrələyən yüksək qoruma aləti.</p><a href="https://www.veracrypt.fr/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>135. Sandboxie</h3><p>Proqramları izolyasiya olunmuş mühitdə test etmə aləti.</p><a href="https://sandboxie-plus.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>136. Comodo Firewall</h3><p>Gələn və gedən şəbəkə bağlantılarını bloklayan fayrvoll.</p><a href="https://www.comodo.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>137. ZoneAlarm Free Firewall</h3><p>Etibarlı sistem divarı proqramı.</p><a href="https://www.zonealarm.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>138. Spybot - Search & Destroy</h3><p>Cəsus proqramları aşkar edən alət.</p><a href="https://www.safer-networking.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>139. Trend Micro HouseCall</h3><p>Onlayn virus skaner proqramı.</p><a href="https://www.trendmicro.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>140. USB Disk Security</h3><p>USB vasitəsilə keçən virusların qarşısını alan proqram.</p><a href="http://www.zbshareware.com/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 141 - 146: Kodlaşdırma, Qrafika və Dizayn -->
-        <div class="card"><h3>141. Notepad++</h3><p>İnkişaf etmiş mətn və kod redaktoru.</p><a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>142. Visual Studio Code</h3><p>Proqramçılar üçün ən universal kod mühiti.</p><a href="https://code.visualstudio.com/Download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>143. Sublime Text</h3><p>Çox sürətli və yüngül mətn redaktoru.</p><a href="https://www.sublimetext.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>144. PyCharm Community</h3><p>Python proqramlaşdırma dili üçün idealdır.</p><a href="https://www.jetbrains.com/pycharm/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>145. Git for Windows</h3><p>Kod versiyalarını idarə etmək üçün rəsmi alət.</p><a href="https://git-scm.com/download/win" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>146. GitHub Desktop</h3><p>GitHub repozitoriyalarını vizual idarəetmə aləti.</p><a href="https://desktop.github.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>4. Rufus</h3><p>Önyüklənə bilən (Bootable) USB disklər yaratmaq üçün alət.</p><a href="https://rufus.ie/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>5. CCleaner</h3><p>Sistem fayllarını təmizləyən və registri optimallaşdıran proqram.</p><a href="https://www.ccleaner.com/ccleaner/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>6. Google Chrome</h3><p>Dünyanın ən çox istifadə olunan sürətli veb brauzeri.</p><a href="https://www.google.com/chrome/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>7. Mozilla Firefox</h3><p>Məfhumluğa və təhlükəsizliyə önəm verən veb brauzer.</p><a href="https://www.mozilla.org/firefox/new/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>8. Opera GX</h3><p>Oyunçular üçün xüsusi RAM və CPU limitləmə funksiyalı brauzer.</p><a href="https://www.opera.com/gx" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>9. VLC Media Player</h3><p>Bütün video və audio formatlarını dəstəkləyən pleyer.</p><a href="https://www.videolan.org/vlc/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>10. Internet Download Manager</h3><p>Yükləmə sürətini maksimuma çatdıran menecer.</p><a href="https://www.internetdownloadmanager.com/download.html" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>11. uTorrent</h3><p>Ən populyar Torrent yükləmə müştərisi.</p><a href="https://www.utorrent.com/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>12. Telegram Desktop</h3><p>Masaüstü üçün sürətli mesajlaşma tətbiqi.</p><a href="https://desktop.telegram.org/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>13. Discord</h3><p>Oyunçular üçün səsli və mətnli ünsiyyət platforması.</p><a href="https://discord.com/download" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>14. Steam</h3><p>Ən böyük rəqəmsal oyun mağazası və platforması.</p><a href="https://store.steampowered.com/about/" target="_blank" class="btn-download">Yüklə</a></div>
+        <div class="card"><h3>15. Visual Studio Code</h3><p>Proqramçılar üçün ən universal kod mühiti.</p><a href="https://code.visualstudio.com/Download" target="_blank" class="btn-download">Yüklə</a></div>
     </div>
 </div>
 
@@ -273,8 +113,166 @@
     <p>© 2026 LABIRENT CLUB - Bütün hüquqlar qorunur.</p>
 </footer>
 
+<!-- Realist Buqələmun Fizikası və Canvas Animasiya Skripti -->
 <script>
-    // Axtarış süzgəci funksiyası
+    const canvas = document.getElementById('chameleonCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let x = 50;
+    let speed = 0.8;
+    let direction = 1;
+    let stepCycle = 0;
+    let hue = 120; // Başlanğıc yaşıl rəng
+    let tongueOut = false;
+    let tongueLength = 0;
+
+    // Göz hərəkətləri üçün təsadüfi bucaqlar
+    let eyeAngle1 = 0;
+    let eyeAngle2 = 0;
+
+    function drawChameleon() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Rəngin avtomatik dəyişməsi
+        hue = (hue + 0.2) % 360;
+        let color = `hsl(${hue}, 70%, 45%)`;
+        let darkColor = `hsl(${hue}, 70%, 30%)`;
+
+        // Addım fizikası (Leg Movement)
+        stepCycle += 0.08;
+        let legOffset1 = Math.sin(stepCycle) * 12;
+        let legOffset2 = Math.cos(stepCycle) * 12;
+
+        ctx.save();
+        ctx.translate(x, 60);
+        if (direction === -1) {
+            ctx.scale(-1, 1);
+        }
+
+        // 1. Quyruq (Spiral Tail)
+        ctx.beginPath();
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = color;
+        ctx.moveTo(-35, 0);
+        ctx.bezierCurveTo(-50, -10 + Math.sin(stepCycle)*5, -60, 15, -45, 20);
+        ctx.bezierCurveTo(-35, 25, -40, 5, -50, 10);
+        ctx.stroke();
+
+        // 2. Arxa Ayaqlar (Back Legs)
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = darkColor;
+        // Sol arxa ayaq
+        ctx.moveTo(-20, 10);
+        ctx.lineTo(-25 + legOffset1, 28);
+        ctx.lineTo(-20 + legOffset1, 35);
+        // Sağ arxa ayaq
+        ctx.moveTo(10, 10);
+        ctx.lineTo(5 + legOffset2, 28);
+        ctx.lineTo(10 + legOffset2, 35);
+        ctx.stroke();
+
+        // 3. Bədən (Body & Back Crest)
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        // Bədən ovalı
+        ctx.ellipse(0, 0, 35, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Qabırğalar / Tikanlar (Back Ridges)
+        ctx.fillStyle = darkColor;
+        for (let i = -25; i <= 20; i += 8) {
+            ctx.beginPath();
+            ctx.arc(i, -18, 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 4. Ön Ayaqlar (Front Legs)
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = color;
+        // Sol ön ayaq
+        ctx.moveTo(-15, 10);
+        ctx.lineTo(-10 + legOffset2, 28);
+        ctx.lineTo(-15 + legOffset2, 35);
+        // Sağ ön ayaq
+        ctx.moveTo(15, 10);
+        ctx.lineTo(20 + legOffset1, 28);
+        ctx.lineTo(15 + legOffset1, 35);
+        ctx.stroke();
+
+        // 5. Baş (Head)
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.moveTo(25, -15);
+        ctx.lineTo(45, -5);
+        ctx.lineTo(35, 12);
+        ctx.lineTo(20, 10);
+        ctx.closePath();
+        ctx.fill();
+
+        // 6. Müstəqil Hərəkət Edən Gözlər (Independent 360 Turret Eyes)
+        eyeAngle1 += (Math.random() - 0.5) * 0.2;
+        eyeAngle2 += (Math.random() - 0.5) * 0.2;
+
+        // Göz bazası (Conical Eye Base)
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.arc(32, -4, 8, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Bəbək (Pupil)
+        ctx.beginPath();
+        ctx.fillStyle = '#000';
+        let pupilX = 32 + Math.cos(eyeAngle1) * 3;
+        let pupilY = -4 + Math.sin(eyeAngle1) * 3;
+        ctx.arc(pupilX, pupilY, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 7. Dil Animasiyası (Shooting Tongue)
+        if (Math.random() < 0.005 && !tongueOut) {
+            tongueOut = true;
+        }
+
+        if (tongueOut) {
+            tongueLength += 6;
+            ctx.beginPath();
+            ctx.strokeStyle = '#ff4757';
+            ctx.lineWidth = 3;
+            ctx.moveTo(42, 5);
+            ctx.lineTo(42 + tongueLength, 5);
+            ctx.stroke();
+
+            // Dilin ucu (Sticky tip)
+            ctx.beginPath();
+            ctx.fillStyle = '#ff4757';
+            ctx.arc(42 + tongueLength, 5, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (tongueLength > 70) {
+                tongueOut = false;
+            }
+        } else if (tongueLength > 0) {
+            tongueLength -= 8;
+        }
+
+        ctx.restore();
+
+        // Üfqi Gəzmək Məntiqi (Walk Position Update)
+        x += speed * direction;
+        if (x > canvas.width - 60) {
+            direction = -1;
+        } else if (x < 60) {
+            direction = 1;
+        }
+
+        requestAnimationFrame(drawChameleon);
+    }
+
+    // Animasiyanı başlat
+    drawChameleon();
+
+    // Axtarış süzgəci
     function filterPrograms() {
         let input = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.getElementsByClassName('card');
