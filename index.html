@@ -7,8 +7,59 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f8f9fa; color: #333; }
-        header { background: #1b2838; color: #fff; padding: 25px 15px; text-align: center; border-bottom: 4px solid #00a8ff; }
-        header h1 { font-size: 32px; letter-spacing: 1.5px; margin-bottom: 5px; }
+        
+        /* Header və Buqələmun Animasiya Sahəsi */
+        header { 
+            background: #1b2838; 
+            color: #fff; 
+            padding: 35px 15px 25px 15px; 
+            text-align: center; 
+            border-bottom: 4px solid #00a8ff; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-title-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 10px 20px;
+        }
+
+        header h1 { font-size: 32px; letter-spacing: 1.5px; margin-bottom: 5px; position: relative; z-index: 2; }
+        
+        /* Buqələmun (Chameleon) Stylinqi və Animasiyası */
+        .chameleon {
+            position: absolute;
+            font-size: 24px;
+            top: -15px;
+            left: 0;
+            z-index: 3;
+            animation: walkAndJump 12s infinite ease-in-out, colorChange 6s infinite linear;
+            user-select: none;
+        }
+
+        /* Buqələmunun gəzməsi, düşüb-qalxması */
+        @keyframes walkAndJump {
+            0% { left: 0%; top: -15px; transform: scaleX(1); }
+            20% { left: 40%; top: -15px; transform: scaleX(1); }
+            30% { left: 50%; top: 15px; transform: scaleX(1); } /* Başlığın üzərindən aşağı düşür */
+            40% { left: 60%; top: -15px; transform: scaleX(1); } /* Yenidən yuxarı qalxır */
+            50% { left: 85%; top: -15px; transform: scaleX(-1); } /* Dönür geriyə */
+            70% { left: 45%; top: -15px; transform: scaleX(-1); }
+            80% { left: 35%; top: 15px; transform: scaleX(-1); } /* Geriyə gələndə də düşür */
+            90% { left: 20%; top: -15px; transform: scaleX(-1); }
+            100% { left: 0%; top: -15px; transform: scaleX(1); }
+        }
+
+        /* Buqələmunun rəng dəyişməsi */
+        @keyframes colorChange {
+            0% { filter: drop-shadow(0 0 8px #00ff88) hue-rotate(0deg); }
+            25% { filter: drop-shadow(0 0 8px #00a8ff) hue-rotate(90deg); }
+            50% { filter: drop-shadow(0 0 8px #9b59b6) hue-rotate(180deg); }
+            75% { filter: drop-shadow(0 0 8px #e74c3c) hue-rotate(270deg); }
+            100% { filter: drop-shadow(0 0 8px #00ff88) hue-rotate(360deg); }
+        }
+
         nav { background: #2c3e50; display: flex; justify-content: center; border-bottom: 2px solid #34495e; }
         nav a { color: #fff; text-decoration: none; padding: 14px 25px; font-weight: bold; font-size: 15px; display: block; }
         nav a:hover, nav a.active { background: #00a8ff; color: #fff; }
@@ -33,7 +84,11 @@
 <body>
 
 <header>
-    <h1>LABIRENT CLUB</h1>
+    <div class="header-title-wrapper">
+        <!-- Rəngini dəyişərək gəzən buqələmun -->
+        <div class="chameleon">🦎</div>
+        <h1>LABIRENT CLUB</h1>
+    </div>
     <p>Rəqəmsal Yükləmə Mərkəzi</p>
 </header>
 
@@ -204,93 +259,36 @@
         <div class="card"><h3>139. Trend Micro HouseCall</h3><p>Onlayn virus skaner proqramı.</p><a href="https://www.trendmicro.com/" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>140. USB Disk Security</h3><p>USB vasitəsilə keçən virusların qarşısını alan proqram.</p><a href="http://www.zbshareware.com/" target="_blank" class="btn-download">Yüklə</a></div>
 
-        <!-- 141 - 160: Kodlaşdırma, Qrafika və Dizayn -->
+        <!-- 141 - 146: Kodlaşdırma, Qrafika və Dizayn -->
         <div class="card"><h3>141. Notepad++</h3><p>İnkişaf etmiş mətn və kod redaktoru.</p><a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>142. Visual Studio Code</h3><p>Proqramçılar üçün ən universal kod mühiti.</p><a href="https://code.visualstudio.com/Download" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>143. Sublime Text</h3><p>Çox sürətli və yüngül mətn redaktoru.</p><a href="https://www.sublimetext.com/download" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>144. PyCharm Community</h3><p>Python proqramlaşdırma dili üçün idealdır.</p><a href="https://www.jetbrains.com/pycharm/download/" target="_blank" class="btn-download">Yüklə</a></div>
         <div class="card"><h3>145. Git for Windows</h3><p>Kod versiyalarını idarə etmək üçün rəsmi alət.</p><a href="https://git-scm.com/download/win" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>146. GitHub Desktop</h3><p>GitHub repozitoriyalarını vizual idarə etmə aləti.</p><a href="https://desktop.github.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>147. Docker Desktop</h3><p>Konteynerləşdirmə proqram təminatı.</p><a href="https://www.docker.com/products/docker-desktop/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>148. Android Studio</h3><p>Android tətbiqləri hazırlamaq üçün rəsmi IDE.</p><a href="https://developer.android.com/studio" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>149. GIMP</h3><p>Photoshop alternativ pulsuz foto redaktoru.</p><a href="https://www.gimp.org/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>150. Paint.NET</h3><p>Sadə və istifadəsi rahat şəkil redaktoru.</p><a href="https://www.getpaint.net/download.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>151. Blender</h3><p>Peşəkar 3D modelləmə və animasiya proqramı.</p><a href="https://www.blender.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>152. Krita</h3><p>Rəssamlar və illüstratorlar üçün çizim proqramı.</p><a href="https://krita.org/en/download/krita-desktop/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>153. Inkscape</h3><p>Vektor qrafika redaktoru.</p><a href="https://inkscape.org/release/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>154. Figma Desktop</h3><p>İnterfeys və UI/UX dizayn proqramı.</p><a href="https://www.figma.com/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>155. PhotoScape X</h3><p>Effektlər və şəkil redaktəsi üçün rahat alət.</p><a href="http://x.photoscape.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>156. Darktable</h3><p>RAW fotoları emal edən açıq mənbəli alət.</p><a href="https://www.darktable.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>157. RawTherapee</h3><p>Peşəkar fotoşəkil emalı proqramı.</p><a href="https://rawtherapee.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>158. ShareX</h3><p>Ekran görüntüsü alıb birbaşa paylaşan güclü alət.</p><a href="https://getsharex.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>159. Lightshot</h3><p>Sürətli ekran fotosu kəsmə aləti.</p><a href="https://app.prntscr.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>160. Greenshot</h3><p>Masaüstü screenshot aləti.</p><a href="https://getgreenshot.org/" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 161 - 180: Ekran Qeydi, Səs və Sistem Diaqnostikası -->
-        <div class="card"><h3>161. OBS Studio</h3><p>Canlı yayın və peşəkar ekran qeydi proqramı.</p><a href="https://obsproject.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>162. FastStone Capture</h3><p>Ekran görüntüləri və video almaq üçün yüngül alət.</p><a href="https://www.faststone.org/FSCaptureDetail.htm" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>163. Audacity</h3><p>Pulsuz səs yazma və redaktə etmə aləti.</p><a href="https://www.audacityteam.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>164. Bandicam</h3><p>Oyun və yüksək keyfiyyətli ekran qeydi aləti.</p><a href="https://www.bandicam.com/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>165. Camtasia Studio</h3><p>Video montaj və ekran qeydi proqramı.</p><a href="https://www.techsmith.com/video-editor.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>166. DaVinci Resolve</h3><p>Peşəkar pulsuz video montaj proqramı.</p><a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>167. Shotcut</h3><p>Açıq mənbəli sadə video redaktoru.</p><a href="https://shotcut.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>168. OpenShot</h3><p>Başlayanlar üçün asan video montaj proqramı.</p><a href="https://www.openshot.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>169. CPU-Z</h3><p>Prosessor və sistem avadanlığı haqqında məlumat aləti.</p><a href="https://www.cpuid.com/softwares/cpu-z.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>170. GPU-Z</h3><p>Videokart haqqında detallı texniki məlumat aləti.</p><a href="https://www.techpowerup.com/gpuz/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>171. HWMonitor</h3><p>Temperatur və voltaj göstəricilərini izləmə aləti.</p><a href="https://www.cpuid.com/softwares/hwmonitor.html" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>172. CrystalDiskInfo</h3><p>Sərt disklərin (HDD/SSD) sağlamlığını göstərir.</p><a href="https://crystalmark.info/en/software/crystaldiskinfo/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>173. CrystalDiskMark</h3><p>Disk oxuma və yazma sürətini test edən alət.</p><a href="https://crystalmark.info/en/software/crystaldiskmark/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>174. Speccy</h3><p>Sisteminizin detallı avadanlıq siyahısını çıxarır.</p><a href="https://www.ccleaner.com/speccy" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>175. AIDA64 Extreme</h3><p>Hərtərəfli sistem diaqnostika aləti.</p><a href="https://www.aida64.com/downloads" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>176. MemTest86</h3><p>RAM yaddaşındakı xətaları skan edən alət.</p><a href="https://www.memtest86.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>177. HWiNFO</h3><p>Kompyuter hardware komponentlərini dərindən izləyir.</p><a href="https://www.hwinfo.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>178. FurMark</h3><p>Videokartı maksimal yükləyərək test edən alət.</p><a href="https://geeks3d.com/furmark/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>179. Process Explorer</h3><p>Genişləndirilmiş Windows Task Manager alternativi.</p><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>180. Autoruns</h3><p>Sistemlə birgə açılan bütün proqramları idarə edir.</p><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns" target="_blank" class="btn-download">Yüklə</a></div>
-
-        <!-- 181 - 200: PDF, Ofis və Digər Alətlər -->
-        <div class="card"><h3>181. Foxit PDF Reader</h3><p>Sürətli PDF sənəd oxuyucu proqramı.</p><a href="https://www.foxit.com/pdf-reader/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>182. Adobe Acrobat Reader</h3><p>Rəsmi PDF oxuma aləti.</p><a href="https://get.adobe.com/reader/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>183. Sumatra PDF</h3><p>Ən yüngül və sürətli PDF oxuyucu.</p><a href="https://www.sumatrapdfreader.org/free-pdf-reader" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>184. PDF24 Creator</h3><p>PDF yaradılması, birləşdirilməsi və çevrilməsi aləti.</p><a href="https://tools.pdf24.org/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>185. LibreOffice</h3><p>Microsoft Office-in pulsuz tam alternativi.</p><a href="https://www.libreoffice.org/download/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>186. WPS Office</h3><p>Müasir görünüşlü ofis proqramlar paketi.</p><a href="https://www.wps.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>187. Apache OpenOffice</h3><p>Pulsuz mətn və cədvəl redaktoru paketi.</p><a href="https://www.openoffice.org/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>188. Calibre</h3><p>E-kitab idarəetmə və çevirmə proqramı.</p><a href="https://calibre-ebook.com/download" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>189. Everything</h3><p>Faylları kompyuter daxilində anında tapır.</p><a href="https://www.voidtools.com/downloads/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>190. Listary</h3><p>Fayl sistemində sürətli axtarış köməkçisi.</p><a href="https://www.listary.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>191. TeraCopy</h3><p>Faylları bərpa edərək sürətlə kopyalayan alət.</p><a href="https://www.codesector.com/teracopy" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>192. FastCopy</h3><p>Windows üçün ən sürətli fayl kopyalama proqramı.</p><a href="https://fastcopy.jp/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>193. Rainmeter</h3><p>Masaüstünə qadcetlər və vidcetlər əlavə edən alət.</p><a href="https://www.rainmeter.net/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>194. Wallpaper Engine</h3><p>Canlı və hərəkətli masaüstü divar kağızları aləti.</p><a href="https://www.wallpaperengine.io/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>195. Lively Wallpaper</h3><p>Açıq mənbəli pulsuz canlı divar kağızı proqramı.</p><a href="https://rocksdanister.github.io/lively/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>196. AutoHotkey</h3><p>Masaüstü əmrlərini avtomatlaşdıran skript aləti.</p><a href="https://www.autohotkey.com/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>197. PowerToys</h3><p>Windows üçün Microsoft tərəfindən rəsmi köməkçi alətlər.</p><a href="https://learn.microsoft.com/en-us/windows/powertoys/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>198. Spotify</h3><p>Musiqi və podkast dinləmə platforması.</p><a href="https://www.spotify.com/download/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>199. iTunes</h3><p>Apple cihazları üçün media idarəetmə proqramı.</p><a href="https://www.apple.com/itunes/" target="_blank" class="btn-download">Yüklə</a></div>
-        <div class="card"><h3>200. Duet Display</h3><p>Planşet və telefonu ikinci monitor kimi istifadə etmək üçün.</p><a href="https://www.duetdisplay.com/" target="_blank" class="btn-download">Yüklə</a></div>
-
+        <div class="card"><h3>146. GitHub Desktop</h3><p>GitHub repozitoriyalarını vizual idarəetmə aləti.</p><a href="https://desktop.github.com/" target="_blank" class="btn-download">Yüklə</a></div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; LABIRENT CLUB - Bütün hüquqlar qorunur.</p>
+    <p>© 2026 LABIRENT CLUB - Bütün hüquqlar qorunur.</p>
 </footer>
 
 <script>
-function filterPrograms() {
-    let input = document.getElementById('searchInput').value.toLowerCase();
-    let cards = document.getElementsByClassName('card');
-
-    for (let i = 0; i < cards.length; i++) {
-        let cardText = cards[i].innerText.toLowerCase();
-        if (cardText.includes(input)) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
+    // Axtarış süzgəci funksiyası
+    function filterPrograms() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('card');
+        
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+            let desc = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+            if (title.includes(input) || desc.includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
         }
     }
-}
 </script>
 
 </body>
