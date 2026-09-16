@@ -177,149 +177,111 @@
 <script>
     const whatsappNumber = "994500000000"; 
 
-    // TƏKRARSIZ HƏR BİRİ 1 ƏDƏD OLAN XÜSUSİ OYUN LİSTİ
-    const ps4Games = [
-        {
-            id: 1,
-            title: "Grand Theft Auto V",
-            genre: "Açıq Dünya / Aksiyon",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg",
-            desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi, böyük soyğunlar və azad macəra."
-        },
-        {
-            id: 2,
-            title: "God of War Ragnarök",
-            genre: "Aksiyon / Macəra",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2322010/header.jpg",
-            desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə və Ragnarök fəlakətinə qarşı mübarizəsi."
-        },
-        {
-            id: 3,
-            title: "Red Dead Redemption 2",
-            genre: "Açıq Dünya / Vəhşi Qərb",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg",
-            desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi."
-        },
-        {
-            id: 4,
-            title: "eFootball PES 2021",
-            genre: "İdman / Futbol",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1259970/header.jpg",
-            desc: "Yüksək simulyasiya keyfiyyəti, real taktikalar və Master League rejimi ilə futbol həyəcanı."
-        },
-        {
-            id: 5,
-            title: "EA SPORTS FC 24",
-            genre: "İdman / Futbol",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg",
-            desc: "HyperMotionV texnologiyası, Ultimate Team və dünyanın ən nüfuzlu futbol liqaları."
-        },
-        {
-            id: 6,
-            title: "The Last of Us Part I",
-            genre: "Hekayə / Qorxu / Macəra",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg",
-            desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli və emosional səyahəti."
-        },
-        {
-            id: 7,
-            title: "Marvel's Spider-Man Remastered",
-            genre: "Aksion / Superqəhrəman",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
-            desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə aparın."
-        },
-        {
-            id: 8,
-            title: "Mortal Kombat 11",
-            genre: "Döyüş",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/976310/header.jpg",
-            desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri."
-        },
-        {
-            id: 9,
-            title: "Cyberpunk 2077",
-            genre: "Açıq Dünya / RPG",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
-            desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu qəhrəman."
-        },
-        {
-            id: 10,
-            title: "Call of Duty: Modern Warfare",
-            genre: "Atışma (FPS)",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2000950/header.jpg",
-            desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə atmosferi."
-        },
-        {
-            id: 11,
-            title: "Assassin's Creed Valhalla",
-            genre: "RPG / Viking",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2208920/header.jpg",
-            desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi və yaşayış məskəni qurması."
-        },
-        {
-            id: 12,
-            title: "Need for Speed Heat",
-            genre: "Yarış",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg",
-            desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları."
-        },
-        {
-            id: 13,
-            title: "Resident Evil 4 Remake",
-            genre: "Qorxu / Aksiyon",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg",
-            desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün qaranlıq kəndə təhlükəli missiyası."
-        },
-        {
-            id: 14,
-            title: "Uncharted 4: A Thief's End",
-            genre: "Macəra / Aksiyon",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg",
-            desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və ən təhlükəli səyahəti."
-        },
-        {
-            id: 15,
-            title: "Ghost of Tsushima DIRECTOR'S CUT",
-            genre: "Açıq Dünya / Samuray",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg",
-            desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün Samuray yolundan çıxması."
-        },
-        {
-            id: 16,
-            title: "Horizon Forbidden West",
-            genre: "Açıq Dünya / RPG",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/2420110/header.jpg",
-            desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi."
-        },
-        {
-            id: 17,
-            title: "Elden Ring",
-            genre: "RPG / Fantaziya",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
-            desc: "Aratılan torpaqlarda Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat."
-        },
-        {
-            id: 18,
-            title: "Tekken 7",
-            genre: "Döyüş",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/389730/header.jpg",
-            desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı və onlayn turnirlər."
-        },
-        {
-            id: 19,
-            title: "The Witcher 3: Wild Hunt",
-            genre: "RPG / Açıq Dünya",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg",
-            desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə."
-        },
-        {
-            id: 20,
-            title: "Batman: Arkham Knight",
-            genre: "Aksiyon / Macəra",
-            img: "https://cdn.akamai.steamstatic.com/steam/apps/208650/header.jpg",
-            desc: "Gotham şəhərini qorumaq üçün Betmobil sürün və Scarecrow-a qarşı döyüşün."
-        }
+    const rawGames = [
+        { title: "Grand Theft Auto V", genre: "Açıq Dünya / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg", desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi və böyük soyğunlar." },
+        { title: "God of War Ragnarök", genre: "Aksiyon / Macəra", img: "https://cdn.akamai.steamstatic.com/steam/apps/2322010/header.jpg", desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə qarşı mübarizəsi." },
+        { title: "Red Dead Redemption 2", genre: "Açıq Dünya / Vəhşi Qərb", img: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg", desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi." },
+        { title: "eFootball PES 2021", genre: "İdman / Futbol", img: "https://cdn.akamai.steamstatic.com/steam/apps/1259970/header.jpg", desc: "Yüksək simulyasiya keyfiyyəti və Master League rejimi ilə futbol həyəcanı." },
+        { title: "EA SPORTS FC 24", genre: "İdman / Futbol", img: "https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg", desc: "HyperMotionV texnologiyası və Ultimate Team rejimi ilə müasir futbol." },
+        { title: "The Last of Us Part I", genre: "Hekayə / Qorxu", img: "https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg", desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli səyahəti." },
+        { title: "Marvel's Spider-Man Remastered", genre: "Aksion / Superqəhrəman", img: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg", desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə." },
+        { title: "Mortal Kombat 11", genre: "Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/976310/header.jpg", desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri." },
+        { title: "Cyberpunk 2077", genre: "Açıq Dünya / RPG", img: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg", desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu." },
+        { title: "Call of Duty: Modern Warfare", genre: "Atışma (FPS)", img: "https://cdn.akamai.steamstatic.com/steam/apps/2000950/header.jpg", desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə." },
+        { title: "Assassin's Creed Valhalla", genre: "RPG / Viking", img: "https://cdn.akamai.steamstatic.com/steam/apps/2208920/header.jpg", desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi." },
+        { title: "Need for Speed Heat", genre: "Yarış", img: "https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg", desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları." },
+        { title: "Resident Evil 4 Remake", genre: "Qorxu / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg", desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün təhlükəli missiyası." },
+        { title: "Uncharted 4: A Thief's End", genre: "Macəra / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg", desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və təhlükəli səyahəti." },
+        { title: "Ghost of Tsushima DIRECTOR'S CUT", genre: "Açıq Dünya / Samuray", img: "https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg", desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün savaşı." },
+        { title: "Horizon Forbidden West", genre: "Açıq Dünya / RPG", img: "https://cdn.akamai.steamstatic.com/steam/apps/2420110/header.jpg", desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi." },
+        { title: "Elden Ring", genre: "RPG / Fantaziya", img: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg", desc: "Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat." },
+        { title: "Tekken 7", genre: "Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/389730/header.jpg", desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı." },
+        { title: "The Witcher 3: Wild Hunt", genre: "RPG / Açıq Dünya", img: "https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg", desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə." },
+        { title: "Batman: Arkham Knight", genre: "Aksiyon / Macəra", img: "https://cdn.akamai.steamstatic.com/steam/apps/208650/header.jpg", desc: "Gotham şəhərini qorumaq üçün Betmobil sürün və Scarecrow-a qarşı döyüşün." },
+        { title: "Mafia: Definitive Edition", genre: "Açıq Dünya / Mafia", img: "https://cdn.akamai.steamstatic.com/steam/apps/1030840/header.jpg", desc: "Tommy Angelo-nun taksi sürücülüyündən mafiya ailəsinə yüksəlmə hekayəsi." },
+        { title: "Days Gone", genre: "Açıq Dünya / Zombi", img: "https://cdn.akamai.steamstatic.com/steam/apps/1259420/header.jpg", desc: "Deacon St. John-un zombi epidemiyası sonrasında motosiklet üzərində həyat mübarizəsi." },
+        { title: "Dying Light 2 Stay Human", genre: "Parkur / Zombi", img: "https://cdn.akamai.steamstatic.com/steam/apps/534380/header.jpg", desc: "Zombilərlə dolu şəhərdə parkur hərəkətləri ilə sağ qalmaq mübarizəsi." },
+        { title: "Far Cry 6", genre: "Açıq Dünya / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/2369390/header.jpg", desc: "Yara adasında diktator Anton Castilloya qarşı inqilabi mübarizə." },
+        { title: "Sekiro: Shadows Die Twice", genre: "Aksiyon / Samuray", img: "https://cdn.akamai.steamstatic.com/steam/apps/814380/header.jpg", desc: "Tək qollu shinobi döyüşçüsünün öz ağasını qorumaq üçün intiqam yolu." },
+        { title: "Devil May Cry 5", genre: "Aksiyon / Hack and Slash", img: "https://cdn.akamai.steamstatic.com/steam/apps/601150/header.jpg", desc: "Nero, Dante və V iblislərə qarşı sürətli və üslublu döyüşlər aparır." },
+        { title: "Control", genre: "Mistik / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/870780/header.jpg", desc: "Federal Təhqiqat Bürosunun binasında telekinetik güclərlə sirli varlıqlara qarşı döyüş." },
+        { title: "Death Stranding", genre: "Macəra / Simulyasiya", img: "https://cdn.akamai.steamstatic.com/steam/apps/1850570/header.jpg", desc: "Sam Porter Bridges parçalanmış cəmiyyəti yenidən birləşdirmək üçün yük daşıyır." },
+        { title: "Hitman 3", genre: "Gizlilik / Suiqəsd", img: "https://cdn.akamai.steamstatic.com/steam/apps/1659040/header.jpg", desc: "Agent 47 olaraq dünyanın müxtəlif yerlərində peşəkar suiqəsdlər həyata keçirin." },
+        { title: "Resident Evil Village", genre: "Qorxu / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/1196590/header.jpg", desc: "Ethan Winters-in qızını xilas etmək üçün dəhşətli kənddə apardığı mübarizə." },
+        { title: "Detroit: Become Human", genre: "Interaktiv Hekayə", img: "https://cdn.akamai.steamstatic.com/steam/apps/1080110/header.jpg", desc: "İnsanlıq hissi qazanan 3 fərqli androidin taleyini sizin seçimləriniz müəyyən edir." },
+        { title: "Battlefield 1", genre: "Hərbi / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/1238840/header.jpg", desc: "Birinci Dünya Müharibəsinin qanlı döyüş meydanlarında miqyaslı müharibə." },
+        { title: "Bloodborne", genre: "Qorxu / RPG", img: "https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg", desc: "Yharnam qədim şəhərində lənətlənmiş canavarlara qarşı amansız döyüşlər." },
+        { title: "Street Fighter V", genre: "Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/310950/header.jpg", desc: "Klassik küçə döyüşçüləri ilə dinamik və taktiki 1v1 döyüşlər." },
+        { title: "Watch Dogs 2", genre: "Açıq Dünya / Haker", img: "https://cdn.akamai.steamstatic.com/steam/apps/447040/header.jpg", desc: "Marcus Holloway olaraq San-Fransiskoda şəhər sistemlərini sındırıb mübarizə aparın." },
+        { title: "Need for Speed Payback", genre: "Yarış", img: "https://cdn.akamai.steamstatic.com/steam/apps/1262580/header.jpg", desc: "Fortune Valley-də kartelə qarşı intiqam yarışları və kaskadyorluq." },
+        { title: "Call of Duty: Black Ops Cold War", genre: "FPS / Hərbi", img: "https://cdn.akamai.steamstatic.com/steam/apps/1985810/header.jpg", desc: "Soyuq Müharibə dövrünün gizli kəşfiyyat əməliyyatları və casusluq missiyaları." },
+        { title: "Doom Eternal", genre: "Aksiyon / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/782330/header.jpg", desc: "Doom Slayer olaraq Dünyanı işğal edən iblis ordularını məhv edin." },
+        { title: "Fallout 4", genre: "RPG / Açıq Dünya", img: "https://cdn.akamai.steamstatic.com/steam/apps/377160/header.jpg", desc: "Nüvə müharibəsindən sonrakı sığınacaqdan çıxıb itkin oğlunuzu axtarın." },
+        { title: "Monster Hunter: World", genre: "RPG / Avçılıq", img: "https://cdn.akamai.steamstatic.com/steam/apps/582010/header.jpg", desc: "Nəhəng bədheybətləri ovlayın, yeni zirehlər və silahlar hazırlayın." },
+        { title: "Injustice 2", genre: "Döyüş / Superqəhrəman", img: "https://cdn.akamai.steamstatic.com/steam/apps/627270/header.jpg", desc: "DC Superqəhrəmanları və cani personajlarının amansız qarşıdurması." },
+        { title: "Star Wars Jedi: Fallen Order", genre: "Aksiyon / Macəra", img: "https://cdn.akamai.steamstatic.com/steam/apps/1172380/header.jpg", desc: "Sağ qalan gənc Ceday Cal Kestis-in imperiyadan qaçaraq Gücü öyrənməsi." },
+        { title: "Ghostrunner", genre: "Parkur / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/1139900/header.jpg", desc: "Kiberpank qülləsində bir zərbə ilə düşmənləri kəsərək sürətlə irəliləyin." },
+        { title: "Sniper Elite 4", genre: "Gizlilik / Sniper", img: "https://cdn.akamai.steamstatic.com/steam/apps/312660/header.jpg", desc: "İkinci Dünya Müharibəsi İtaliyasında uzaq məsafəli snayper missiyaları." },
+        { title: "Crash Bandicoot 4: It's About Time", genre: "Platforma", img: "https://cdn.akamai.steamstatic.com/steam/apps/1378990/header.jpg", desc: "Crash və Coco-nun vaxt və məkan çərçivəsini xilas etmək üçün macəraları." },
+        { title: "Little Nightmares II", genre: "Qorxu / Tapmaca", img: "https://cdn.akamai.steamstatic.com/steam/apps/860510/header.jpg", desc: "Mono və Six-in siqnal qülləsinin dəhşətli təsirindən qaçmaq mübarizəsi." },
+        { title: "Subnautica", genre: "Açıq Dünya / Sağ Qalma", img: "https://cdn.akamai.steamstatic.com/steam/apps/264710/header.jpg", desc: "Yad planetin okean dibində resurslar toplayıb sağ kalmağa çalışın." },
+        { title: "Payday 2", genre: "Kooperativ / Soyğun", img: "https://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg", desc: "Dörd nəfərlik komanda ilə banklar və zərgərlik mağazaları soyun." },
+        { title: "Borderlands 3", genre: "Loot Shooter / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/397540/header.jpg", desc: "Milyonlarla müxtəlif silahlar toplayaraq fanatik kulta qarşı savaşın." },
+        { title: "Cuphead", genre: "Aksiyon / Platforma", img: "https://cdn.akamai.steamstatic.com/steam/apps/268910/header.jpg", desc: "1930-cu illərin cizgi filmi üslubunda çətin və dinamik boss döyüşləri." },
+        { title: "Metro Exodus", genre: "Post-Apokaliptik / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/412020/header.jpg", desc: "Artyom və tərəfdaşlarının nüvə qışında qatarla Şərqə tərəf səyahəti." },
+        { title: "Outlast 2", genre: "Qorxu / Gizlilik", img: "https://cdn.akamai.steamstatic.com/steam/apps/414700/header.jpg", desc: "Səhra ortasında fanatik dini təriqətdən yalnız kamera ilə qaçış." },
+        { title: "Overwatch 2", genre: "Komanda / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/2357570/header.jpg", desc: "Müxtəlif bacarıqlı qəhrəmanlarla 5v5 taktiki komanda döyüşləri." },
+        { title: "Nioh 2", genre: "RPG / Samuray", img: "https://cdn.akamai.steamstatic.com/steam/apps/1325200/header.jpg", desc: "Yarım-insan yarım-yokai döyüşçüsü kimi Yaponiyanın qaranlıq dövründə savaş." },
+        { title: "Sifu", genre: "Kung-Fu / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/2138710/header.jpg", desc: "Hər dəfə öləndə qocalan Kung-Fu ustasının intiqam hekayəsi." },
+        { title: "DIRT 5", genre: "Yarış / Ofroad", img: "https://cdn.akamai.steamstatic.com/steam/apps/1038250/header.jpg", desc: "Müxtəlif hava şəraitlərində ekstrim off-road avtomobil yarışları." },
+        { title: "Assetto Corsa Competizione", genre: "Avto-Simulyasiya", img: "https://cdn.akamai.steamstatic.com/steam/apps/805550/header.jpg", desc: "GT3 çempionatının ultra-realist fizika ilə hazırlanmış simulyasiyası." },
+        { title: "Tekken 8", genre: "Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/1778820/header.jpg", desc: "Kazama və Mishima xəttinin yeni nəsil Heat sistemi ilə şiddətli döyüşü." },
+        { title: "Stray", genre: "Macəra / Pişik", img: "https://cdn.akamai.steamstatic.com/steam/apps/1332010/header.jpg", desc: "Robotlarla dolu unudulmuş kiber-şəhərdən qaçmağa çalışan azmış pişik." },
+        { title: "Kena: Bridge of Spirits", genre: "Macəra / Fantaziya", img: "https://cdn.akamai.steamstatic.com/steam/apps/1950640/header.jpg", desc: "Ruh bələdçisi Kenanın kiçik şirin ruhlarla kəndi bərpa etməsi." },
+        { title: "The Dark Pictures Anthology: House of Ashes", genre: "Qorxu / Interaktiv", img: "https://cdn.akamai.steamstatic.com/steam/apps/1281590/header.jpg", desc: "İraq müharibəsində qədim Sumor məbədinə düşən əsgərlərin dəhşətli gecəsi." },
+        { title: "A Plague Tale: Innocence", genre: "Hekayə / Gizlilik", img: "https://cdn.akamai.steamstatic.com/steam/apps/752590/header.jpg", desc: "Amicia və Hugo-nun Taun epidemiyası və inkvizisiyadan qaçış hekayəsi." },
+        { title: "DQXIS: Dragon Quest XI S", genre: "JRPG / Macəra", img: "https://cdn.akamai.steamstatic.com/steam/apps/1295510/header.jpg", desc: "Təqib olunan Qəhrəmanın dünyanı qaranlıqdan xilas etmək üçün səyahəti." },
+        { title: "Persona 5 Royal", genre: "JRPG / Şəhər", img: "https://cdn.akamai.steamstatic.com/steam/apps/1687950/header.jpg", desc: "Gündüz məktəbli, gecə isə insanların ürəyini dəyişən Fantom Oğrusu olun." },
+        { title: "Gran Turismo Sport", genre: "Yarış / Simulyasiya", img: "https://gmedia.playstation.com/is/image/SIEPDC/gran-turismo-sport-code-strip-01-en-13nov18?$facebook$", desc: "Rəsmi FIA çempionatları və real idman avtomobilləri ilə trek yarışı." },
+        { title: "Watch Dogs Legion", genre: "Açıq Dünya", img: "https://cdn.akamai.steamstatic.com/steam/apps/2239550/header.jpg", desc: "London küçələrində qarşılaşdığınız hər bir sakini müqavimət dəstəsinə cəlb edin." },
+        { title: "Marvel's Guardians of the Galaxy", genre: "Macəra / Kosmos", img: "https://cdn.akamai.steamstatic.com/steam/apps/1088710/header.jpg", desc: "Star-Lord kimi komandanıza rəhbərlik edərək kosmik fəlakətin qarşısını alın." },
+        { title: "Shadow of the Tomb Raider", genre: "Macəra / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/750920/header.jpg", desc: "Lara Croft cəngəllikləri fəth edərək Maya apokalipsisini dayandırmağa çalışır." },
+        { title: "Life is Strange 2", genre: "Interaktiv / Hekayə", img: "https://cdn.akamai.steamstatic.com/steam/apps/532210/header.jpg", desc: "Fövqəltəbii gücə yiyələnən iki qardaşın Meksikaya tərəf çətin səyahəti." },
+        { title: "Kingdom Hearts III", genre: "RPG / Disney", img: "https://cdn.akamai.steamstatic.com/steam/apps/2552430/header.jpg", desc: "Sora, Donald və Goofy-nin Disney dünyalarında qaranlığa qarşı savaşı." },
+        { title: "Darksiders III", genre: "Hack and Slash", img: "https://cdn.akamai.steamstatic.com/steam/apps/606280/header.jpg", desc: "Qiyamətin dörd atlısından biri olan Fury ilə yeddi ölümcül günahı ovlayın." },
+        { title: "Just Cause 4", genre: "Açıq Dünya / Partlayış", img: "https://cdn.akamai.steamstatic.com/steam/apps/517000/header.jpg", desc: "Rico Rodriguez Solis adasında qarmaq və paraşütlə xaos yaradır." },
+        { title: "Far Cry Primal", genre: "Açıq Dünya / Daş Dövrü", img: "https://cdn.akamai.steamstatic.com/steam/apps/371660/header.jpg", desc: "Mamontlar və qılıncd dişli pələnglərin dövründə avadanlıq yaradıb sağ qalın." },
+        { title: "Heavy Rain", genre: "Interaktiv / Psixoloji", img: "https://cdn.akamai.steamstatic.com/steam/apps/960910/header.jpg", desc: "Origami Qatili kimi tanınan seriyalı qatili tapmaq üçün 4 personajın dindirilməsi." },
+        { title: "Beyond: Two Souls", genre: "Interaktiv / Mistik", img: "https://cdn.akamai.steamstatic.com/steam/apps/960990/header.jpg", desc: "Jodie Holmes-un anadangəlmə bağlı olduğu sirli ruhla 15 illik həyatı." },
+        { title: "Until Dawn", genre: "Qorxu / Interaktiv", img: "https://gmedia.playstation.com/is/image/SIEPDC/until-dawn-hero-banner-desktop-01-en-02may24?$facebook$", desc: "Dağ daxmasında qalan 8 dostun qatildən və məxluqlardan səhərə qədər qaçışı." },
+        { title: "Sleeping Dogs: Definitive Edition", genre: "Açıq Dünya / Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/307690/header.jpg", desc: "Honkonqda gizli polis Wei Shen olaraq Triada cinayət şəbəkəsinə sızın." },
+        { title: "Dying Light", genre: "Parkur / Zombi", img: "https://cdn.akamai.steamstatic.com/steam/apps/239140/header.jpg", desc: "Gündüz resurs toplayın, gecə isə dəhşətli yırtıcı zombilərdən qaçın." },
+        { title: "Mad Max", genre: "Açıq Dünya / Avtomobil", img: "https://cdn.akamai.steamstatic.com/steam/apps/234140/header.jpg", desc: "Səhranın ortasında sağ qalmaq üçün öz döyüş maşınınızı (Magnum Opus) qurun." },
+        { title: "Alien: Isolation", genre: "Qorxu / Gizlilik", img: "https://cdn.akamai.steamstatic.com/steam/apps/214490/header.jpg", desc: "Kosmik stansiyada tək bir öldürücü Ksenomorf-dan gizlənərək sağ qalın." },
+        { title: "Wolfenstein II: The New Colossus", genre: "FPS / Hərbi", img: "https://cdn.akamai.steamstatic.com/steam/apps/612880/header.jpg", desc: "B.J. Blazkowicz olaraq faşist işğalı altındakı Amerikada inqilab başladın." },
+        { title: "Dishonored 2", genre: "Gizlilik / Immersive Sim", img: "https://cdn.akamai.steamstatic.com/steam/apps/403640/header.jpg", desc: "Sehrli güclərlə qanunsuz taxt-tacınızı geri almaq üçün kölgələrdə hərəkət edin." },
+        { title: "Prey", genre: "Sci-Fi / Immersive Sim", img: "https://cdn.akamai.steamstatic.com/steam/apps/480490/header.jpg", desc: "Talos I kosmik stansiyasında formalı dəyişən yadplanetlilərə qarşı döyüş." },
+        { title: "Borderlands: The Handsome Collection", genre: "Loot Shooter", img: "https://cdn.akamai.steamstatic.com/steam/apps/49940/header.jpg", desc: "Pandora planetində çılğın quldurlara qarşı xaos dolu silah döyüşləri." },
+        { title: "Sniper Ghost Warrior Contracts 2", genre: "Taktiki / Sniper", img: "https://cdn.akamai.steamstatic.com/steam/apps/1338770/header.jpg", desc: "Yaxın Şərqdə 1 kilometrdən artıq məsafədən hədəfləri vurmaq missiyaları." },
+        { title: "Rage 2", genre: "Açıq Dünya / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/548570/header.jpg", desc: "Səhralıq dünyada çılğın silahlar və süper güclərlə düşmənləri darmadağın edin." },
+        { title: "Ghost Recon Wildlands", genre: "Açıq Dünya / Taktiki", img: "https://cdn.akamai.steamstatic.com/steam/apps/460930/header.jpg", desc: "Boliviyada narkotik kartelini çökdürmək üçün xüsusi təyinatlı qrup." },
+        { title: "Uncharted: The Nathan Drake Collection", genre: "Macəra / Aksiyon", img: "https://gmedia.playstation.com/is/image/SIEPDC/uncharted-the-nathan-drake-collection-code-strip-01-en-02nov18?$facebook$", desc: "Nathan Drake-in ilk üç əfsanəvi xəzinə axtarışı səyahətinin yenilənmiş versiyası." },
+        { title: "The Elder Scrolls V: Skyrim Special Edition", genre: "RPG / Açıq Dünya", img: "https://cdn.akamai.steamstatic.com/steam/apps/489830/header.jpg", desc: "Dragonborn olaraq əfsanəvi əjdahalarla döyüşün və öz kaderinizi yazın." }
     ];
+
+    // DƏQİQ DUPLİKATLARIN QARŞISINI ALAN SİSTEM
+    const seenTitles = new Set();
+    const ps4Games = [];
+
+    rawGames.forEach((game) => {
+        if (!seenTitles.has(game.title)) {
+            seenTitles.add(game.title);
+            ps4Games.push({
+                id: ps4Games.length + 1,
+                ...game
+            });
+        }
+    });
 
     function renderGames(data) {
         const grid = document.getElementById('gamesGrid');
