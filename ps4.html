@@ -70,7 +70,7 @@
         
         .card-img-wrapper {
             width: 100%;
-            height: 280px;
+            height: 140px;
             background-color: #0b1120;
             overflow: hidden;
         }
@@ -177,7 +177,7 @@
 <script>
     const whatsappNumber = "994500000000"; 
 
-    // Birbaşa CDN Şəkilləri ilə 100% Dəqiq Oyun Siyahısı
+    // TƏKRARSIZ HƏR BİRİ 1 ƏDƏD OLAN XÜSUSİ OYUN LİSTİ
     const ps4Games = [
         {
             id: 1,
@@ -190,7 +190,7 @@
             id: 2,
             title: "God of War Ragnarök",
             genre: "Aksiyon / Macəra",
-            img: "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-hero-banner-desktop-01-en-07sep21?$facebook$",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2322010/header.jpg",
             desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə və Ragnarök fəlakətinə qarşı mübarizəsi."
         },
         {
@@ -216,14 +216,14 @@
         },
         {
             id: 6,
-            title: "The Last of Us Part II",
+            title: "The Last of Us Part I",
             genre: "Hekayə / Qorxu / Macəra",
-            img: "https://gmedia.playstation.com/is/image/SIEPDC/the-last-of-us-part-2-hero-banner-desktop-01-en-18may20?$facebook$",
-            desc: "Ellie-nin post-apokaliptik dünyada intiqam, sadiqlik və sağ qalmaq uğrunda emosional hekayəsi."
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg",
+            desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli və emosional səyahəti."
         },
         {
             id: 7,
-            title: "Marvel's Spider-Man",
+            title: "Marvel's Spider-Man Remastered",
             genre: "Aksion / Superqəhrəman",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
             desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə aparın."
@@ -258,66 +258,66 @@
         },
         {
             id: 12,
-            title: "UFC 4",
-            genre: "Döyüş / İdman",
-            img: "https://gmedia.playstation.com/is/image/SIEPDC/ea-sports-ufc-4-hero-banner-desktop-01-en-15jul20?$facebook$",
-            desc: "MMA oktaqonunda öz döyüşçünüzü yaradın və Dünya Çempionu olmaq üçün mübarizə aparın."
-        },
-        {
-            id: 13,
             title: "Need for Speed Heat",
             genre: "Yarış",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg",
             desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları."
         },
         {
-            id: 14,
+            id: 13,
             title: "Resident Evil 4 Remake",
             genre: "Qorxu / Aksiyon",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg",
             desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün qaranlıq kəndə təhlükəli missiyası."
         },
         {
-            id: 15,
+            id: 14,
             title: "Uncharted 4: A Thief's End",
             genre: "Macəra / Aksiyon",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg",
             desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və ən təhlükəli səyahəti."
         },
         {
-            id: 16,
-            title: "Ghost of Tsushima",
+            id: 15,
+            title: "Ghost of Tsushima DIRECTOR'S CUT",
             genre: "Açıq Dünya / Samuray",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg",
             desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün Samuray yolundan çıxması."
         },
         {
-            id: 17,
+            id: 16,
             title: "Horizon Forbidden West",
             genre: "Açıq Dünya / RPG",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/2420110/header.jpg",
             desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi."
         },
         {
-            id: 18,
+            id: 17,
             title: "Elden Ring",
             genre: "RPG / Fantaziya",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
             desc: "Aratılan torpaqlarda Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat."
         },
         {
-            id: 19,
+            id: 18,
             title: "Tekken 7",
             genre: "Döyüş",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/389730/header.jpg",
             desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı və onlayn turnirlər."
         },
         {
-            id: 20,
+            id: 19,
             title: "The Witcher 3: Wild Hunt",
             genre: "RPG / Açıq Dünya",
             img: "https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg",
             desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə."
+        },
+        {
+            id: 20,
+            title: "Batman: Arkham Knight",
+            genre: "Aksiyon / Macəra",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/208650/header.jpg",
+            desc: "Gotham şəhərini qorumaq üçün Betmobil sürün və Scarecrow-a qarşı döyüşün."
         }
     ];
 
