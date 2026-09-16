@@ -3,87 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LABIRENT CLUB - 500+ PS4 Oyun Kataloqu</title>
+    <title>LABIRENT CLUB - 500 PS4 Oyun Kataloqu</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0f172a; color: #f8fafc; }
         
         header { 
             background: #1e293b; 
-            padding: 35px 20px 20px 20px; 
+            padding: 30px 20px 20px 20px; 
             text-align: center; 
             border-bottom: 4px solid #0070d1;
         }
 
-        header h1 { font-size: 34px; color: #38bdf8; letter-spacing: 2px; margin-bottom: 8px; }
-        header p { color: #94a3b8; font-size: 15px; }
+        header h1 { font-size: 32px; color: #38bdf8; letter-spacing: 1px; margin-bottom: 6px; }
+        header p { color: #94a3b8; font-size: 14px; }
 
         nav { background: #0f172a; display: flex; justify-content: center; border-bottom: 1px solid #334155; }
-        nav a { color: #f8fafc; text-decoration: none; padding: 15px 25px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        nav a { color: #f8fafc; text-decoration: none; padding: 14px 22px; font-weight: bold; font-size: 15px; transition: 0.2s; }
         nav a:hover, nav a.active { background: #0070d1; color: #fff; }
 
-        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .container { max-width: 1400px; margin: 25px auto; padding: 0 15px; }
 
         .search-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 35px;
+            gap: 10px;
+            margin-bottom: 30px;
         }
 
         .search-input { 
             width: 100%; 
-            max-width: 650px; 
-            padding: 15px 22px; 
-            font-size: 16px; 
+            max-width: 600px; 
+            padding: 13px 20px; 
+            font-size: 15px; 
             background: #1e293b;
             color: #fff;
             border: 2px solid #334155; 
-            border-radius: 30px; 
+            border-radius: 25px; 
             outline: none; 
             transition: all 0.3s; 
         }
 
-        .search-input:focus { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
-        .stats-counter { color: #38bdf8; font-weight: 600; font-size: 15px; }
+        .search-input:focus { border-color: #0070d1; box-shadow: 0 0 12px rgba(0, 112, 209, 0.4); }
+        .stats-counter { color: #38bdf8; font-weight: 600; font-size: 14px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 18px; 
+        }
         
         .card { 
             background: #1e293b; 
             border: 1px solid #334155; 
-            border-radius: 12px; 
+            border-radius: 10px; 
             overflow: hidden;
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
-            transition: transform 0.2s, border-color 0.2s; 
+            transition: transform 0.2s, border-color 0.2s;
+            height: 100%;
         }
 
-        .card:hover { transform: translateY(-5px); border-color: #0070d1; }
+        .card:hover { transform: translateY(-4px); border-color: #0070d1; }
         
         .card-img {
             width: 100%;
-            height: 270px;
+            height: 220px;
             object-fit: cover;
             border-bottom: 1px solid #334155;
-            background-color: #0f172a;
+            display: block;
         }
 
-        .card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card h3 { font-size: 15px; color: #38bdf8; margin-bottom: 8px; line-height: 1.3; }
-        .card .badge { display: inline-block; font-size: 11px; background: #0070d1; color: #fff; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px; width: fit-content; }
-        .card p { font-size: 12px; color: #94a3b8; margin-bottom: 15px; line-height: 1.4; }
+        .card-body { 
+            padding: 14px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            flex-grow: 1;
+        }
+        
+        .badge { 
+            display: inline-block; 
+            font-size: 11px; 
+            background: #0070d1; 
+            color: #fff; 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            margin-bottom: 8px; 
+            width: fit-content; 
+            font-weight: 600;
+        }
+
+        .card h3 { 
+            font-size: 15px; 
+            color: #ffffff; 
+            margin-bottom: 8px; 
+            line-height: 1.3; 
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .card p { 
+            font-size: 12px; 
+            color: #94a3b8; 
+            margin-bottom: 14px; 
+            line-height: 1.4; 
+            height: 34px;
+            overflow: hidden;
+        }
         
         .btn-whatsapp { 
             background: #25d366; 
             color: #fff; 
             text-decoration: none; 
             text-align: center; 
-            padding: 10px; 
+            padding: 9px; 
             border-radius: 6px; 
-            font-size: 14px; 
+            font-size: 13px; 
             font-weight: bold; 
             transition: background 0.2s;
             display: block;
@@ -91,14 +132,14 @@
 
         .btn-whatsapp:hover { background: #1da851; }
 
-        footer { text-align: center; padding: 25px; margin-top: 50px; font-size: 14px; color: #64748b; background: #1e293b; border-top: 1px solid #334155; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; font-size: 13px; color: #64748b; background: #1e293b; border-top: 1px solid #334155; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>LABIRENT CLUB</h1>
-    <p>500 Dəqiq PS4 Oyun Kataloqu</p>
+    <p>Rəqəmsal PS4 Oyun Kataloqu (500 Ədəd)</p>
 </header>
 
 <nav>
@@ -124,10 +165,9 @@
 </footer>
 
 <script>
-    // ƏLAQƏ WHATSAPP NÖMRƏSİ (Ölkə kodu ilə istifadə edin)
+    // ÖZ WHATSAPP NÖMRƏNİ BURAYA YAZ
     const whatsappNumber = "994556383363"; 
 
-    // Əsas Populyar PS4 Oyun Bazası
     const basePS4Games = [
         "Grand Theft Auto V", "God of War Ragnarök", "Red Dead Redemption 2", "eFootball PES 2021", 
         "EA SPORTS FC 24", "The Last of Us Part II", "Marvel's Spider-Man", "Mortal Kombat 11", 
@@ -143,46 +183,52 @@
     ];
 
     const genres = ["Aksiyon", "Açıq Dünya", "Macəra", "İdman / Futbol", "Döyüş", "RPG", "Yarış", "Atışma (FPS)", "Qorxu"];
-    const prefixes = ["Ultimate", "Remastered", "Edition", "Chronicles", "Reloaded", "Legacy", "Origins", "Evolutions"];
+    const prefixes = ["Ultimate Edition", "Remastered", "Gold Edition", "Chronicles", "Reloaded", "Legacy", "Origins", "Evolutions"];
 
-    // Dinamik SVG Kapak Generatoru (Şəkillərin tam 100% açılmasını təmin edir)
-    function generatePoster(title) {
+    // %100 Yüklənən və Xətasız SVG Afişa Generatoru
+    function generateCleanPoster(title, id) {
         const cleanTitle = title.replace(/[^a-zA-Z0-9\s]/g, '').trim();
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+        const colors = [
+            ["#0f172a", "#0070d1"],
+            ["#1e1b4b", "#4338ca"],
+            ["#14532d", "#15803d"],
+            ["#701a75", "#a21caf"],
+            ["#7c2d12", "#c2410c"]
+        ];
+        const selectedColor = colors[id % colors.length];
+
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="350" viewBox="0 0 300 350">
             <defs>
-                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#0070d1;stop-opacity:1" />
+                <linearGradient id="g${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:${selectedColor[0]};stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:${selectedColor[1]};stop-opacity:1" />
                 </linearGradient>
             </defs>
-            <rect width="100%" height="100%" fill="url(#grad)" />
-            <rect x="10" y="10" width="280" height="380" fill="none" stroke="#38bdf8" stroke-width="2" rx="10"/>
-            <text x="50%" y="30%" font-family="Segoe UI, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">PS4 GAME</text>
-            <text x="50%" y="55%" font-family="Segoe UI, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle" width="260">${cleanTitle.substring(0, 22)}</text>
-            <text x="50%" y="85%" font-family="Segoe UI, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">LABIRENT CLUB</text>
+            <rect width="100%" height="100%" fill="url(#g${id})" />
+            <rect x="12" y="12" width="276" height="326" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4" rx="8"/>
+            <text x="50%" y="25%" font-family="Segoe UI, sans-serif" font-size="18" font-weight="bold" fill="#38bdf8" text-anchor="middle">PS4 OFFICIAL</text>
+            <text x="50%" y="50%" font-family="Segoe UI, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">${cleanTitle.substring(0, 20)}</text>
+            <text x="50%" y="82%" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">LABIRENT CLUB</text>
         </svg>`;
         return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     }
 
-    // Tam 500 Unikal Oyun generatoru
     function getExact500Games() {
         let list = [];
         let index = 1;
 
-        // Əsas oyunları əlavə edirik
         basePS4Games.forEach(title => {
             let g = genres[index % genres.length];
             list.push({
                 id: index,
                 name: `${index}. ${title}`,
                 genre: g,
-                img: generatePoster(title),
-                desc: `${title} — PlayStation 4 üçün yüksək keyfiyyətli, tam işlək və orijinal oyun.`
+                img: generateCleanPoster(title, index),
+                desc: `${title} — PS4 üçün tam tənzimlənmiş və rəsmi oyun versiyası.`
             });
             index++;
         });
 
-        // Sayı 500-ə çatdıran dövr
         while(index <= 500) {
             let baseName = basePS4Games[index % basePS4Games.length];
             let pref = prefixes[index % prefixes.length];
@@ -193,8 +239,8 @@
                 id: index,
                 name: `${index}. ${fullName}`,
                 genre: g,
-                img: generatePoster(fullName),
-                desc: `${fullName} — PS4 konsolu üçün unikal ${g.toLowerCase()} təcrübəsi təqdim edən oyun.`
+                img: generateCleanPoster(fullName, index),
+                desc: `${fullName} — PS4 konsolunda yüksək keyfiyyətli ${g.toLowerCase()} təcrübəsi.`
             });
             index++;
         }
