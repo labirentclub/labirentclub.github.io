@@ -161,7 +161,7 @@
 
 <div class="container">
     <div class="search-area">
-        <input type="text" id="searchInput" class="search-input" onkeyup="filterGames()" placeholder="PS4 oyunu axtar (Məs: GTA 5, FIFA, God of War, Spider-Man)...">
+        <input type="text" id="searchInput" class="search-input" onkeyup="filterGames()" placeholder="PS4 oyunu axtar (Məs: EA Sports FC 26, Far Cry 6, GTA 5, FIFA)...">
         <div class="stats-counter" id="statsCounter">Mövcud Oyun Sayı: 0</div>
     </div>
 
@@ -175,14 +175,14 @@
 </footer>
 
 <script>
-    const whatsappNumber = "994556383363"; 
+    const whatsappNumber = "99456383363"; 
 
     const ps4Games = [
         { id: 1, title: "Grand Theft Auto V", genre: "Açıq Dünya / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg", desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi və böyük soyğunlar." },
         { id: 2, title: "God of War Ragnarök", genre: "Aksiyon / Macəra", img: "https://cdn.akamai.steamstatic.com/steam/apps/2322010/header.jpg", desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə qarşı mübarizəsi." },
         { id: 3, title: "Red Dead Redemption 2", genre: "Açıq Dünya / Vəhşi Qərb", img: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg", desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi." },
         { id: 4, title: "eFootball PES 2021", genre: "İdman / Futbol", img: "https://cdn.akamai.steamstatic.com/steam/apps/1259970/header.jpg", desc: "Yüksək simulyasiya keyfiyyəti və Master League rejimi ilə futbol həyəcanı." },
-        { id: 5, title: "EA SPORTS FC 24", genre: "İdman / Futbol", img: "https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg", desc: "HyperMotionV texnologiyası və Ultimate Team rejimi ilə müasir futbol." },
+        { id: 5, title: "EA SPORTS FC 26", genre: "İdman / Futbol", img: "https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg", desc: "Ən son heyət yenilənmələri, təkmilləşdirilmiş oyun dinamikası və futbol təcrübəsi." },
         { id: 6, title: "The Last of Us Part I", genre: "Hekayə / Qorxu", img: "https://cdn.akamai.steamstatic.com/steam/apps/1888930/header.jpg", desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli səyahəti." },
         { id: 7, title: "Marvel's Spider-Man Remastered", genre: "Aksion / Superqəhrəman", img: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg", desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə." },
         { id: 8, title: "Mortal Kombat 11", genre: "Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/976310/header.jpg", desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri." },
@@ -201,7 +201,7 @@
         { id: 21, title: "Mafia: Definitive Edition", genre: "Açıq Dünya / Mafia", img: "https://cdn.akamai.steamstatic.com/steam/apps/1030840/header.jpg", desc: "Tommy Angelo-nun taksi sürücülüyündən mafiya ailəsinə yüksəlmə hekayəsi." },
         { id: 22, title: "Days Gone", genre: "Açıq Dünya / Zombi", img: "https://cdn.akamai.steamstatic.com/steam/apps/1259420/header.jpg", desc: "Deacon St. John-un zombi epidemiyası sonrasında motosiklet üzərində həyat mübarizəsi." },
         { id: 23, title: "Dying Light 2 Stay Human", genre: "Parkur / Zombi", img: "https://cdn.akamai.steamstatic.com/steam/apps/534380/header.jpg", desc: "Zombilərlə dolu şəhərdə parkur hərəkətləri ilə sağ qalmaq mübarizəsi." },
-        { id: 24, title: "Far Cry 6", genre: "Açıq Dünya / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/2369390/header.jpg", desc: "Yara adasında diktator Anton Castilloya qarşı inqilabi mübarizə." },
+        { id: 24, title: "Far Cry 6", genre: "Açıq Dünya / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/2369390/header.jpg", desc: "Yara adasında diktator Antón Castilloya qarşı inqilabi mübarizə." },
         { id: 25, title: "Sekiro: Shadows Die Twice", genre: "Aksiyon / Samuray", img: "https://cdn.akamai.steamstatic.com/steam/apps/814380/header.jpg", desc: "Tək qollu shinobi döyüşçüsünün öz ağasını qorumaq üçün intiqam yolu." },
         { id: 26, title: "Devil May Cry 5", genre: "Aksiyon / Hack and Slash", img: "https://cdn.akamai.steamstatic.com/steam/apps/601150/header.jpg", desc: "Nero, Dante və V iblislərə qarşı sürətli və üslublu döyüşlər aparır." },
         { id: 27, title: "Control", genre: "Mistik / Aksiyon", img: "https://cdn.akamai.steamstatic.com/steam/apps/870780/header.jpg", desc: "Federal Təhqiqat Bürosunun binasında telekinetik güclərlə sirli varlıqlara qarşı döyüş." },
@@ -247,7 +247,7 @@
         { id: 67, title: "Kingdom Hearts III", genre: "RPG / Disney", img: "https://cdn.akamai.steamstatic.com/steam/apps/2552430/header.jpg", desc: "Sora, Donald və Goofy-nin Disney dünyalarında qaranlığa qarşı savaşı." },
         { id: 68, title: "Darksiders III", genre: "Hack and Slash", img: "https://cdn.akamai.steamstatic.com/steam/apps/606280/header.jpg", desc: "Qiyamətin dörd atlısından biri olan Fury ilə yeddi ölümcül günahı ovlayın." },
         { id: 69, title: "Just Cause 4", genre: "Açıq Dünya / Partlayış", img: "https://cdn.akamai.steamstatic.com/steam/apps/517000/header.jpg", desc: "Rico Rodriguez Solis adasında qarmaq və paraşütlə xaos yaradır." },
-        { id: 70, title: "Far Cry Primal", genre: "Açıq Dünya / Daş Dövrü", img: "https://cdn.akamai.steamstatic.com/steam/apps/371660/header.jpg", desc: "Mamontlar və qılıncd dişli pələnglərin dövründə avadanlıq yaradıb sağ qalın." },
+        { id: 70, title: "Far Cry 5", genre: "Açıq Dünya / FPS", img: "https://cdn.akamai.steamstatic.com/steam/apps/552520/header.jpg", desc: "Hope County şəhərində fanatik dini cult lideri Joseph Seed-ə qarşı mübarizə." },
         { id: 71, title: "Heavy Rain", genre: "Interaktiv / Psixoloji", img: "https://cdn.akamai.steamstatic.com/steam/apps/960910/header.jpg", desc: "Origami Qatili kimi tanınan seriyalı qatili tapmaq üçün 4 personajın dindirilməsi." },
         { id: 72, title: "Beyond: Two Souls", genre: "Interaktiv / Mistik", img: "https://cdn.akamai.steamstatic.com/steam/apps/960990/header.jpg", desc: "Jodie Holmes-un anadangəlmə bağlı olduğu sirli ruhla 15 illik həyatı." },
         { id: 73, title: "Sleeping Dogs: Definitive Edition", genre: "Açıq Dünya / Döyüş", img: "https://cdn.akamai.steamstatic.com/steam/apps/307690/header.jpg", desc: "Honkonqda gizli polis Wei Shen olaraq Triada cinayət şəbəkəsinə sızın." },
@@ -281,8 +281,7 @@
             const message = encodeURIComponent(`Salam, LABIRENT CLUB! Mən PS4 üçün "${game.title}" oyununu əldə etmək istəyirəm.`);
             const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-            // Şəkil keçidinə ?v=90 əlavə edildi (Cache Bypass)
-            const freshImgUrl = `${game.img}?v=90`;
+            const freshImgUrl = `${game.img}?v=26`;
 
             card.innerHTML = `
                 <div class="card-img-wrapper">
