@@ -68,13 +68,20 @@
 
         .card:hover { transform: translateY(-4px); border-color: #0070d1; }
         
-        .card-img {
+        .card-img-wrapper {
             width: 100%;
             height: 260px;
+            background-color: #0b1120;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-bottom: 1px solid #334155;
             display: block;
-            background-color: #0f172a;
         }
 
         .card-body { 
@@ -160,7 +167,7 @@
     </div>
 
     <div class="grid" id="gamesGrid">
-        <!-- 500 Oyun Bura Yüklənir -->
+        <!-- Oyunlar Bura Yüklənir -->
     </div>
 </div>
 
@@ -169,129 +176,128 @@
 </footer>
 
 <script>
-    // WHATSAPP ƏLAQƏ NÖMRƏSİ
     const whatsappNumber = "994556383363"; 
 
-    // Real PS4 Oyunları, Öz Şəkilləri, Janr Etiketləri və Hekayə Təsvirləri
+    // Açıq CDN şəkil linkləri (CORS Bloklamasına Düşməyən)
     const realGamesList = [
         {
             title: "Grand Theft Auto V",
             genre: "Açıq Dünya / Aksiyon",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nt0.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V_cover_art.jpg",
             desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi, böyük soyğunlar və azad macəra."
         },
         {
             title: "God of War Ragnarök",
             genre: "Aksiyon / Macəra",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5s5v.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
             desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə və Ragnarök fəlakətinə qarşı mübarizəsi."
         },
         {
             title: "Red Dead Redemption 2",
             genre: "Açıq Dünya / Vəhşi Qərb",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
             desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi."
         },
         {
             title: "eFootball PES 2021",
             genre: "İdman / Futbol",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2947.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/a/a7/EFootball_PES_2021_Season_Update_cover.jpg",
             desc: "Yüksək simulyasiya keyfiyyəti, real taktikalar və Master League rejimi ilə futbol həyəcanı."
         },
         {
             title: "EA SPORTS FC 24",
             genre: "İdman / Futbol",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6q54.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/b/b8/EA_Sports_FC_24_cover.jpg",
             desc: "HyperMotionV texnologiyası, Ultimate Team və dünyanın ən nüfuzlu futbol liqaları."
         },
         {
             title: "The Last of Us Part II",
             genre: "Hekayə / Qorxu / Macəra",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2fb6.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art.jpg",
             desc: "Ellie-nin post-apokaliptik dünyada intiqam, sadiqlik və sağ qalmaq uğrunda emosional hekayəsi."
         },
         {
             title: "Marvel's Spider-Man",
             genre: "Aksion / Superqəhrəman",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/e/e1/Spider-Man_PS4_cover.jpg",
             desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə aparın."
         },
         {
             title: "Mortal Kombat 11",
             genre: "Döyüş",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1pfs.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/7/7e/Mortal_Kombat_11_cover_art.png",
             desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri."
         },
         {
             title: "Cyberpunk 2077",
             genre: "Açıq Dünya / RPG",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co21ll.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
             desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu qəhrəman."
         },
         {
             title: "Call of Duty: Modern Warfare",
             genre: "Atışma (FPS)",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rbp.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/e/e9/Call_of_Duty_Modern_Warfare_box_art.png",
             desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə atmosferi."
         },
         {
             title: "Assassin's Creed Valhalla",
             genre: "RPG / Viking",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co22cb.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/f/ff/Assassin%27s_Creed_Valhalla_cover.jpg",
             desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi və yaşayış məskəni qurması."
         },
         {
             title: "UFC 4",
             genre: "Döyüş / İdman",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co29es.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/2/29/UFC_4_cover.jpg",
             desc: "MMA oktaqonunda öz döyüşçünüzü yaradın və Dünya Çempionu olmaq üçün mübarizə aparın."
         },
         {
             title: "Need for Speed Heat",
             genre: "Yarış",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r8c.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/3/30/Need_for_Speed_Heat_cover.jpg",
             desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları."
         },
         {
             title: "Resident Evil 4 Remake",
             genre: "Qorxu / Aksiyon",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5s5f.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/d/df/Resident_Evil_4_remake_cover_art.jpg",
             desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün qaranlıq kəndə təhlükəli missiyası."
         },
         {
             title: "Uncharted 4: A Thief's End",
             genre: "Macəra / Aksiyon",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7b.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/a/a2/Uncharted_4_cover_art.jpg",
             desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və ən təhlükəli səyahəti."
         },
         {
             title: "Ghost of Tsushima",
             genre: "Açıq Dünya / Samuray",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co204f.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
             desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün Samuray yolundan çıxması."
         },
         {
             title: "Horizon Forbidden West",
             genre: "Açıq Dünya / RPG",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co205a.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg",
             desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi."
         },
         {
             title: "Elden Ring",
             genre: "RPG / Fantaziya",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co4ni3.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_Art.jpg",
             desc: "Aratılan torpaqlarda Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat."
         },
         {
             title: "Tekken 7",
             genre: "Döyüş",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rb7.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/1/17/Tekken_7_Cover_Art.jpg",
             desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı və onlayn turnirlər."
         },
         {
             title: "The Witcher 3: Wild Hunt",
             genre: "RPG / Açıq Dünya",
-            img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7e.jpg",
+            img: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg",
             desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə."
         }
     ];
@@ -299,25 +305,10 @@
     const genres = ["Aksiyon", "Açıq Dünya", "Macəra", "İdman", "Döyüş", "RPG", "Yarış", "Atışma (FPS)", "Qorxu"];
     const prefixes = ["Ultimate Edition", "Remastered", "Gold Edition", "Chronicles", "Reloaded", "Legacy", "Origins", "Evolutions"];
 
-    // Xəta olduqda yüklənəcək ehtiyat SVG şəkil
-    function generateFallbackPoster(title, id) {
-        const cleanTitle = title.replace(/[^a-zA-Z0-9\s]/g, '').trim();
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="350" viewBox="0 0 300 350">
-            <rect width="100%" height="100%" fill="#1e293b"/>
-            <rect x="10" y="10" width="280" height="330" fill="none" stroke="#0070d1" stroke-width="2" rx="8"/>
-            <text x="50%" y="30%" font-family="Segoe UI, sans-serif" font-size="18" font-weight="bold" fill="#38bdf8" text-anchor="middle">PS4 GAME</text>
-            <text x="50%" y="50%" font-family="Segoe UI, sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">${cleanTitle.substring(0, 20)}</text>
-            <text x="50%" y="80%" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">LABIRENT CLUB</text>
-        </svg>`;
-        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-    }
-
-    // Tam 500 Oyun Yaradan Generator
     function generate500FullGames() {
         let list = [];
         let index = 1;
 
-        // 1. Öncə real 20 əsas oyunu daxil edirik
         realGamesList.forEach(game => {
             list.push({
                 id: index,
@@ -329,7 +320,6 @@
             index++;
         });
 
-        // 2. Qalan sayını 500-ə qədər tam unikal hekayələr və şəkillərlə doldururuq
         while(index <= 500) {
             let baseGame = realGamesList[index % realGamesList.length];
             let pref = prefixes[index % prefixes.length];
@@ -340,7 +330,7 @@
                 id: index,
                 title: `${index}. ${fullTitle}`,
                 genre: g,
-                img: baseGame.img, // Hər oyun öz orijinal bazasındakı şəkildən istifadə edir
+                img: baseGame.img,
                 desc: `${fullTitle} — PS4 konsolunda genişləndirilmiş hekayə rejimi, yenilənmiş qrafika və ${g.toLowerCase()} təcrübəsi.`
             });
             index++;
@@ -361,10 +351,11 @@
 
             const message = encodeURIComponent(`Salam, LABIRENT CLUB! Mən PS4 üçün "${game.title}" oyununu əldə etmək istəyirəm.`);
             const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
-            const fallbackImg = generateFallbackPoster(game.title, game.id);
 
             card.innerHTML = `
-                <img src="${game.img}" alt="${game.title}" class="card-img" onerror="this.onerror=null; this.src='${fallbackImg}';">
+                <div class="card-img-wrapper">
+                    <img src="${game.img}" alt="${game.title}" class="card-img" loading="lazy" referrerpolicy="no-referrer">
+                </div>
                 <div class="card-body">
                     <div>
                         <span class="badge">${game.genre}</span>
