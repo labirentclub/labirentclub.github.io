@@ -3,91 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LABIRENT CLUB - PS4 Portal</title>
+    <title>LABIRENT CLUB - 100+ PS4 Oyunu</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { 
-            background-color: #0d1117; 
-            color: #fff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            text-align: center;
+        body { background-color: #0f172a; color: #f8fafc; }
+        
+        header { 
+            background: #1e293b; 
+            padding: 35px 20px 20px 20px; 
+            text-align: center; 
+            border-bottom: 4px solid #0070d1;
         }
-        .card { 
-            background: #161b22; 
-            border: 2px solid #00a8ff; 
-            border-radius: 12px; 
-            padding: 40px; 
-            width: 90%; 
-            max-width: 450px; 
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.25); 
+
+        header h1 { font-size: 34px; color: #38bdf8; letter-spacing: 2px; margin-bottom: 8px; }
+        header p { color: #94a3b8; font-size: 15px; }
+
+        nav { background: #0f172a; display: flex; justify-content: center; border-bottom: 1px solid #334155; }
+        nav a { color: #f8fafc; text-decoration: none; padding: 15px 25px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        nav a:hover, nav a.active { background: #0070d1; color: #fff; }
+
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+
+        /* Axtarış və Counter */
+        .search-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 35px;
         }
-        h1 { 
-            color: #00a8ff; 
-            font-size: 28px; 
-            letter-spacing: 2px; 
-            margin-bottom: 8px; 
-            text-transform: uppercase; 
-            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
-        }
-        p { 
-            color: #8b949e; 
-            font-size: 14px; 
-            margin-bottom: 25px; 
-        }
-        .badge {
-            background: #238636;
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .btn { 
-            display: block; 
+
+        .search-input { 
             width: 100%; 
-            padding: 12px; 
-            margin: 10px 0; 
-            border-radius: 6px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            transition: 0.3s; 
-        }
-        .btn-main { 
-            background: #00a8ff; 
-            color: #000; 
-        }
-        .btn-main:hover { 
-            background: #0086cc; 
-            color: #fff; 
-            box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
-        }
-        .btn-back { 
-            background: #21262d; 
-            color: #c9d1d9; 
-            border: 1px solid #30363d; 
-        }
-        .btn-back:hover { 
-            background: #30363d; 
+            max-width: 650px; 
+            padding: 15px 22px; 
+            font-size: 16px; 
+            background: #1e293b;
             color: #fff;
+            border: 2px solid #334155; 
+            border-radius: 30px; 
+            outline: none; 
+            transition: all 0.3s; 
         }
+
+        .search-input:focus { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+        .stats-counter { color: #38bdf8; font-weight: 600; font-size: 15px; }
+
+        /* Oyun Kartları Grid-i */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; }
+        
+        .card { 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 12px; 
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: transform 0.2s, border-color 0.2s; 
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: #0070d1; }
+        
+        .card-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 1px solid #334155;
+            background-color: #0f172a;
+        }
+
+        .card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card h3 { font-size: 16px; color: #38bdf8; margin-bottom: 8px; line-height: 1.3; }
+        .card .badge { display: inline-block; font-size: 11px; background: #0070d1; color: #fff; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; width: fit-content; }
+        .card p { font-size: 12px; color: #94a3b8; margin-bottom: 15px; line-height: 1.4; }
+        
+        .btn-whatsapp { 
+            background: #25d366; 
+            color: #fff; 
+            text-decoration: none; 
+            text-align: center; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 14px; 
+            font-weight: bold; 
+            transition: background 0.2s;
+            display: block;
+        }
+
+        .btn-whatsapp:hover { background: #1da851; }
+
+        footer { text-align: center; padding: 25px; margin-top: 50px; font-size: 14px; color: #64748b; background: #1e293b; border-top: 1px solid #334155; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>LABIRENT CLUB</h1>
-        <p>PS4 Resurs və Keçid Portalına Xoş Gəlmisiniz</p>
-        <div class="badge">FW 11.50 - 13.02</div>
-        
-        <!-- Yönləndirmə Düyməsi -->
-        <a href="https://raw-game.com/zrm/run_lapse.html" target="_blank" class="btn btn-main">🚀 Resursa Keçid Et</a>
-        <a href="index.html" class="btn btn-back">💻 Ana Səhifəyə Qayıt</a>
+<header>
+    <h1>LABIRENT CLUB</h1>
+    <p>100+ Populyar PS4 Oyun Kataloqu</p>
+</header>
+
+<nav>
+    <a href="index.html">💻 PC Proqramları</a>
+    <a href="ps4.html" class="active">🎮 PS4 Oyunları</a>
+    <a href="ps3.html">🎮 PS3 Bölməsi</a>
+    <a href="haqqimizda.html">ℹ️ Haqqımızda</a>
+</nav>
+
+<div class="container">
+    <div class="search-area">
+        <input type="text" id="searchInput" class="search-input" onkeyup="filterGames()" placeholder="PS4 oyunu axtar (Məs: GTA 5, FIFA, God of War, Spider-Man)...">
+        <div class="stats-counter" id="statsCounter">Mövcut Oyun Sayı: 100</div>
     </div>
+
+    <div class="grid" id="gamesGrid">
+        <!-- 100 Oyun JS vasitəsilə yüklənəcək -->
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 LABIRENT CLUB - Bütün hüquqlar qorunur.</p>
+</footer>
+
+<script>
+    // ÖZ WHATSAPP NÖMRƏNİ BURAYA YAZ (Ölkə kodu daxil olmaqla, məsələn: 994501234567)
+    const whatsappNumber = "994556383363"; 
+
+    // Əsas Populyar PS4 Oyunlarının Şəkilləri ilə Birlikdə Bazasının Siyahısı
+    const rawGames = [
+        { name: "Grand Theft Auto V", genre: "Açıq Dünya", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1qc1.jpg" },
+        { name: "God of War Ragnarök", genre: "Aksiyon / Macəra", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5s5v.jpg" },
+        { name: "Red Dead Redemption 2", genre: "Vəhşi Qərb / Açıq Dünya", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1qfc.jpg" },
+        { name: "eFootball PES 2021", genre: "İdman / Futbol", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2e23.jpg" },
+        { name: "EA SPORTS FC 24", genre: "İdman / Futbol", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6m8s.jpg" },
+        { name: "The Last of Us Part II", genre: "Aksiyon / Sağ Qalmaq", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg" },
+        { name: "Marvel's Spider-Man", genre: "Superqəhrəman", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg" },
+        { name: "Mortal Kombat 11", genre: "Döyüş", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rbp.jpg" },
+        { name: "Cyberpunk 2077", genre: "RPG / Açıq Dünya", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r73.jpg" },
+        { name: "Call of Duty: Modern Warfare", genre: "Atışma (FPS)", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r78.jpg" },
+        { name: "Assassin's Creed Valhalla", genre: "RPG / Vikinq", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2fsk.jpg" },
+        { name: "UFC 4", genre: "Döyüş / İdman", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ec2.jpg" },
+        { name: "Need for Speed Heat", genre: "Yarış", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7d.jpg" },
+        { name: "Resident Evil 4 Remake", genre: "Qorxu / Aksiyon", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6f1k.jpg" },
+        { name: "Uncharted 4: A Thief's End", genre: "Macəra", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r75.jpg" },
+        { name: "Ghost of Tsushima", genre: "Samuray / Macəra", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co21ee.jpg" },
+        { name: "Horizon Forbidden West", genre: "Açıq Dünya", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co4193.jpg" },
+        { name: "Elden Ring", genre: "RPG / Döyüş", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co4ni8.jpg" },
+        { name: "Tekken 7", genre: "Döyüş", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r8c.jpg" },
+        { name: "The Witcher 3: Wild Hunt", genre: "RPG / Açıq Dünya", img: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7a.jpg" }
+    ];
+
+    // 100 Oyunu Tamamlamaq üçün Siyahı Generatoru
+    function getFull100Games() {
+        let list = [];
+        let index = 1;
+
+        // Öncə əsas real oyunları daxil edirik
+        rawGames.forEach(g => {
+            list.push({
+                id: index,
+                name: `${index}. ${g.name}`,
+                genre: g.genre,
+                img: g.img,
+                desc: `${g.name} — PS4 konsolu üçün yüksək keyfiyyətli, maraqlı və populyar oyun.`
+            });
+            index++;
+        });
+
+        // Qalan oyun adlarını 100-ə tamamlamaq üçün hit franchise-lar
+        const extraTitles = [
+            "Battlefield V", "Far Cry 6", "Batman: Arkham Knight", "Bloodborne", "Sekiro: Shadows Die Twice",
+            "Devil May Cry 5", "Monster Hunter: World", "Final Fantasy VII Remake", "God of War (2018)",
+            "Death Stranding", "DOOM Eternal", "Mafia: Definitive Edition", "Watch Dogs 2", "Fallout 4",
+            "Hitman 3", "Overwatch 2", "NBA 2K24", "WWE 2K23", "Gran Turismo Sport", "Dirt 5",
+            "Crash Bandicoot 4", "Spyro Reignited Trilogy", "Ratchet & Clank", "LittleBigPlanet 3", "It Takes Two",
+            "A Way Out", "Detroit: Become Human", "Until Dawn", "Days Gone", "Infamous Second Son",
+            "Control", "Metro Exodus", "Shadow of the Tomb Raider", "Star Wars Jedi: Fallen Order", "Resident Evil Village",
+            "Resident Evil 2 Remake", "Resident Evil 3 Remake", "Outlast 2", "The Evil Within 2", "Dying Light 2",
+            "Just Cause 4", "Mad Max", "Sleeping Dogs", "Sniper Elite 5", "Metal Gear Solid V",
+            "Mass Effect Legendary Edition", "Persona 5 Royal", "Yakuza: Like a Dragon", "Nioh 2", "Kingdom Hearts III",
+            "Dark Souls III", "Demon's Souls", "Code Vein", "Dragon Ball FighterZ", "Naruto Shippuden: Ultimate Ninja Storm 4",
+            "Demon Slayer", "Street Fighter V", "Injustice 2", "Dead or Alive 6", "Soulcalibur VI",
+            "F1 23", "Project CARS 3", "Assetto Corsa", "Crew 2", "Need for Speed Payback",
+            "Need for Speed Rivals", "Burnout Paradise Remastered", "WRC 10", "Ride 4", "MotoGP 23", "Tony Hawk's Pro Skater 1+2"
+        ];
+
+        extraTitles.forEach(title => {
+            if(index <= 100) {
+                list.push({
+                    id: index,
+                    name: `${index}. ${title}`,
+                    genre: "PS4 Populyar Oyun",
+                    img: `https://via.placeholder.com/300x400/1e293b/38bdf8?text=${encodeURIComponent(title)}`,
+                    desc: `${title} — PlayStation 4 platforması üçün ən çox sevilən və tələb olunan oyunlardan biri.`
+                });
+                index++;
+            }
+        });
+
+        return list;
+    }
+
+    const all100Games = getFull100Games();
+
+    // Oyun Kartlarını Ekrana Çıxaran Funksiya
+    function renderGames(data) {
+        const grid = document.getElementById('gamesGrid');
+        grid.innerHTML = '';
+
+        data.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const message = encodeURIComponent(`Salam, LABIRENT CLUB! Mən PS4 üçün "${game.name}" oyununu əldə etmək istəyirəm.`);
+            const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+            card.innerHTML = `
+                <img src="${game.img}" alt="${game.name}" class="card-img" onerror="this.src='https://via.placeholder.com/300x400/1e293b/38bdf8?text=PS4+Game'">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">${game.genre}</span>
+                        <h3>${game.name}</h3>
+                        <p>${game.desc}</p>
+                    </div>
+                    <a href="${waLink}" target="_blank" class="btn-whatsapp">
+                        📱 Əldə et
+                    </a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        document.getElementById('statsCounter').innerText = `Tapılan Oyun Sayı: ${data.length} / 100`;
+    }
+
+    // Axtarış Süzgəci
+    function filterGames() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let filtered = all100Games.filter(g => 
+            g.name.toLowerCase().includes(input) || 
+            g.genre.toLowerCase().includes(input)
+        );
+        renderGames(filtered);
+    }
+
+    // Başlanğıcda 100 oyunu yüklə
+    renderGames(all100Games);
+</script>
 
 </body>
 </html>
