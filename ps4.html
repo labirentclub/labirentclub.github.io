@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LABIRENT CLUB - 500 PS4 Oyun Kataloqu</title>
+    <title>LABIRENT CLUB - PS4 Oyun Kataloqu</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #0f172a; color: #f8fafc; }
@@ -70,10 +70,9 @@
         
         .card-img-wrapper {
             width: 100%;
-            height: 260px;
+            height: 280px;
             background-color: #0b1120;
             overflow: hidden;
-            position: relative;
         }
 
         .card-img {
@@ -150,7 +149,7 @@
 
 <header>
     <h1>LABIRENT CLUB</h1>
-    <p>Rəqəmsal PS4 Oyun Kataloqu (500 Ədəd)</p>
+    <p>Rəqəmsal PS4 Oyun Kataloqu</p>
 </header>
 
 <nav>
@@ -163,7 +162,7 @@
 <div class="container">
     <div class="search-area">
         <input type="text" id="searchInput" class="search-input" onkeyup="filterGames()" placeholder="PS4 oyunu axtar (Məs: GTA 5, FIFA, God of War, Spider-Man)...">
-        <div class="stats-counter" id="statsCounter">Ümumi PS4 Oyun Sayı: 500</div>
+        <div class="stats-counter" id="statsCounter">Mövcud Oyun Sayı: 0</div>
     </div>
 
     <div class="grid" id="gamesGrid">
@@ -176,170 +175,151 @@
 </footer>
 
 <script>
-    const whatsappNumber = "994556383363"; 
+    const whatsappNumber = "994500000000"; 
 
-    // Açıq CDN şəkil linkləri (CORS Bloklamasına Düşməyən)
-    const realGamesList = [
+    // Birbaşa CDN Şəkilləri ilə 100% Dəqiq Oyun Siyahısı
+    const ps4Games = [
         {
+            id: 1,
             title: "Grand Theft Auto V",
             genre: "Açıq Dünya / Aksiyon",
-            img: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V_cover_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg",
             desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi, böyük soyğunlar və azad macəra."
         },
         {
+            id: 2,
             title: "God of War Ragnarök",
             genre: "Aksiyon / Macəra",
-            img: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
+            img: "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-hero-banner-desktop-01-en-07sep21?$facebook$",
             desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə və Ragnarök fəlakətinə qarşı mübarizəsi."
         },
         {
+            id: 3,
             title: "Red Dead Redemption 2",
             genre: "Açıq Dünya / Vəhşi Qərb",
-            img: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg",
             desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi."
         },
         {
+            id: 4,
             title: "eFootball PES 2021",
             genre: "İdman / Futbol",
-            img: "https://upload.wikimedia.org/wikipedia/en/a/a7/EFootball_PES_2021_Season_Update_cover.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1259970/header.jpg",
             desc: "Yüksək simulyasiya keyfiyyəti, real taktikalar və Master League rejimi ilə futbol həyəcanı."
         },
         {
+            id: 5,
             title: "EA SPORTS FC 24",
             genre: "İdman / Futbol",
-            img: "https://upload.wikimedia.org/wikipedia/en/b/b8/EA_Sports_FC_24_cover.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg",
             desc: "HyperMotionV texnologiyası, Ultimate Team və dünyanın ən nüfuzlu futbol liqaları."
         },
         {
+            id: 6,
             title: "The Last of Us Part II",
             genre: "Hekayə / Qorxu / Macəra",
-            img: "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art.jpg",
+            img: "https://gmedia.playstation.com/is/image/SIEPDC/the-last-of-us-part-2-hero-banner-desktop-01-en-18may20?$facebook$",
             desc: "Ellie-nin post-apokaliptik dünyada intiqam, sadiqlik və sağ qalmaq uğrunda emosional hekayəsi."
         },
         {
+            id: 7,
             title: "Marvel's Spider-Man",
             genre: "Aksion / Superqəhrəman",
-            img: "https://upload.wikimedia.org/wikipedia/en/e/e1/Spider-Man_PS4_cover.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg",
             desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə aparın."
         },
         {
+            id: 8,
             title: "Mortal Kombat 11",
             genre: "Döyüş",
-            img: "https://upload.wikimedia.org/wikipedia/en/7/7e/Mortal_Kombat_11_cover_art.png",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/976310/header.jpg",
             desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri."
         },
         {
+            id: 9,
             title: "Cyberpunk 2077",
             genre: "Açıq Dünya / RPG",
-            img: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
             desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu qəhrəman."
         },
         {
+            id: 10,
             title: "Call of Duty: Modern Warfare",
             genre: "Atışma (FPS)",
-            img: "https://upload.wikimedia.org/wikipedia/en/e/e9/Call_of_Duty_Modern_Warfare_box_art.png",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2000950/header.jpg",
             desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə atmosferi."
         },
         {
+            id: 11,
             title: "Assassin's Creed Valhalla",
             genre: "RPG / Viking",
-            img: "https://upload.wikimedia.org/wikipedia/en/f/ff/Assassin%27s_Creed_Valhalla_cover.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2208920/header.jpg",
             desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi və yaşayış məskəni qurması."
         },
         {
+            id: 12,
             title: "UFC 4",
             genre: "Döyüş / İdman",
-            img: "https://upload.wikimedia.org/wikipedia/en/2/29/UFC_4_cover.jpg",
+            img: "https://gmedia.playstation.com/is/image/SIEPDC/ea-sports-ufc-4-hero-banner-desktop-01-en-15jul20?$facebook$",
             desc: "MMA oktaqonunda öz döyüşçünüzü yaradın və Dünya Çempionu olmaq üçün mübarizə aparın."
         },
         {
+            id: 13,
             title: "Need for Speed Heat",
             genre: "Yarış",
-            img: "https://upload.wikimedia.org/wikipedia/en/3/30/Need_for_Speed_Heat_cover.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg",
             desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları."
         },
         {
+            id: 14,
             title: "Resident Evil 4 Remake",
             genre: "Qorxu / Aksiyon",
-            img: "https://upload.wikimedia.org/wikipedia/en/d/df/Resident_Evil_4_remake_cover_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg",
             desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün qaranlıq kəndə təhlükəli missiyası."
         },
         {
+            id: 15,
             title: "Uncharted 4: A Thief's End",
             genre: "Macəra / Aksiyon",
-            img: "https://upload.wikimedia.org/wikipedia/en/a/a2/Uncharted_4_cover_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1659420/header.jpg",
             desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və ən təhlükəli səyahəti."
         },
         {
+            id: 16,
             title: "Ghost of Tsushima",
             genre: "Açıq Dünya / Samuray",
-            img: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg",
             desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün Samuray yolundan çıxması."
         },
         {
+            id: 17,
             title: "Horizon Forbidden West",
             genre: "Açıq Dünya / RPG",
-            img: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/2420110/header.jpg",
             desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi."
         },
         {
+            id: 18,
             title: "Elden Ring",
             genre: "RPG / Fantaziya",
-            img: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_Art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
             desc: "Aratılan torpaqlarda Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat."
         },
         {
+            id: 19,
             title: "Tekken 7",
             genre: "Döyüş",
-            img: "https://upload.wikimedia.org/wikipedia/en/1/17/Tekken_7_Cover_Art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/389730/header.jpg",
             desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı və onlayn turnirlər."
         },
         {
+            id: 20,
             title: "The Witcher 3: Wild Hunt",
             genre: "RPG / Açıq Dünya",
-            img: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg",
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg",
             desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə."
         }
     ];
-
-    const genres = ["Aksiyon", "Açıq Dünya", "Macəra", "İdman", "Döyüş", "RPG", "Yarış", "Atışma (FPS)", "Qorxu"];
-    const prefixes = ["Ultimate Edition", "Remastered", "Gold Edition", "Chronicles", "Reloaded", "Legacy", "Origins", "Evolutions"];
-
-    function generate500FullGames() {
-        let list = [];
-        let index = 1;
-
-        realGamesList.forEach(game => {
-            list.push({
-                id: index,
-                title: `${index}. ${game.title}`,
-                genre: game.genre,
-                img: game.img,
-                desc: game.desc
-            });
-            index++;
-        });
-
-        while(index <= 500) {
-            let baseGame = realGamesList[index % realGamesList.length];
-            let pref = prefixes[index % prefixes.length];
-            let fullTitle = `${baseGame.title} ${pref}`;
-            let g = genres[index % genres.length];
-
-            list.push({
-                id: index,
-                title: `${index}. ${fullTitle}`,
-                genre: g,
-                img: baseGame.img,
-                desc: `${fullTitle} — PS4 konsolunda genişləndirilmiş hekayə rejimi, yenilənmiş qrafika və ${g.toLowerCase()} təcrübəsi.`
-            });
-            index++;
-        }
-
-        return list;
-    }
-
-    const all500Games = generate500FullGames();
 
     function renderGames(data) {
         const grid = document.getElementById('gamesGrid');
@@ -354,12 +334,12 @@
 
             card.innerHTML = `
                 <div class="card-img-wrapper">
-                    <img src="${game.img}" alt="${game.title}" class="card-img" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="${game.img}" alt="${game.title}" class="card-img" loading="lazy">
                 </div>
                 <div class="card-body">
                     <div>
                         <span class="badge">${game.genre}</span>
-                        <h3>${game.title}</h3>
+                        <h3>${game.id}. ${game.title}</h3>
                         <p>${game.desc}</p>
                     </div>
                     <a href="${waLink}" target="_blank" class="btn-whatsapp">
@@ -370,12 +350,12 @@
             grid.appendChild(card);
         });
 
-        document.getElementById('statsCounter').innerText = `Göstərilən PS4 Oyun Sayı: ${data.length} / 500`;
+        document.getElementById('statsCounter').innerText = `Mövcud Oyun Sayı: ${data.length}`;
     }
 
     function filterGames() {
         let input = document.getElementById('searchInput').value.toLowerCase();
-        let filtered = all500Games.filter(g => 
+        let filtered = ps4Games.filter(g => 
             g.title.toLowerCase().includes(input) || 
             g.genre.toLowerCase().includes(input) ||
             g.desc.toLowerCase().includes(input)
@@ -383,7 +363,7 @@
         renderGames(filtered);
     }
 
-    renderGames(all500Games);
+    renderGames(ps4Games);
 </script>
 
 </body>
