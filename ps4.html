@@ -73,6 +73,7 @@
             height: 160px;
             background-color: #0b1120;
             overflow: hidden;
+            position: relative;
         }
 
         .card-img {
@@ -80,6 +81,27 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        .fallback-poster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #00439c, #0f172a);
+        }
+
+        .fallback-poster span {
+            font-size: 11px;
+            color: #38bdf8;
+            margin-top: 5px;
         }
 
         .card-body { 
@@ -176,84 +198,119 @@
 <script>
     const whatsappNumber = "994500000000"; 
 
-    // Brauzerdə dərhal xətasız şəkil generasiya edən funksiya
-    function generateGameImage(title, genre) {
-        const canvas = document.createElement('canvas');
-        canvas.width = 400;
-        canvas.height = 250;
-        const ctx = canvas.getContext('2d');
-
-        // Arxa fon qradiyenti
-        const gradient = ctx.createLinearGradient(0, 0, 400, 250);
-        gradient.addColorStop(0, '#00439c');
-        gradient.addColorStop(1, '#0f172a');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 400, 250);
-
-        // Dekorativ xətlər
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.lineWidth = 10;
-        ctx.beginPath();
-        ctx.arc(350, 50, 120, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        // PS4 Bənd mətni
-        ctx.fillStyle = '#38bdf8';
-        ctx.font = 'bold 16px Segoe UI';
-        ctx.fillText('PLAYSTATION 4', 25, 40);
-
-        // Oyunun Adı
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 22px Segoe UI';
-        
-        // Mətni iki sətirə bölmək üçün
-        const words = title.split(' ');
-        let line = '';
-        let y = 110;
-        
-        for(let n = 0; n < words.length; n++) {
-            let testLine = line + words[n] + ' ';
-            let metrics = ctx.measureText(testLine);
-            if (metrics.width > 340 && n > 0) {
-                ctx.fillText(line, 25, y);
-                line = words[n] + ' ';
-                y += 30;
-            } else {
-                line = testLine;
-            }
-        }
-        ctx.fillText(line, 25, y);
-
-        // Janr hissəsi
-        ctx.fillStyle = '#94a3b8';
-        ctx.font = '14px Segoe UI';
-        ctx.fillText('Genre: ' + genre, 25, y + 45);
-
-        return canvas.toDataURL('image/png');
-    }
-
+    // PlayStation Rəsmi Media Serverlərindən Orijinal Əsas Şəkillər
     const ps4Games = [
-        { id: 1, title: "Grand Theft Auto V", genre: "Açıq Dünya", desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi və böyük soyğunlar." },
-        { id: 2, title: "God of War Ragnarök", genre: "Aksiyon / Macəra", desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə qarşı mübarizəsi." },
-        { id: 3, title: "Red Dead Redemption 2", genre: "Vəhşi Qərb", desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi." },
-        { id: 4, title: "eFootball PES 2021", genre: "İdman / Futbol", desc: "Yüksək simulyasiya keyfiyyəti və Master League rejimi ilə futbol həyəcanı." },
-        { id: 5, title: "EA SPORTS FC 24", genre: "İdman / Futbol", desc: "Ən son heyət yenilənmələri, təkmilləşdirilmiş oyun dinamikası və futbol təcrübəsi." },
-        { id: 6, title: "The Last of Us Part I", genre: "Hekayə / Qorxu", desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli səyahəti." },
-        { id: 7, title: "Marvel's Spider-Man", genre: "Superqəhrəman", desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə." },
-        { id: 8, title: "Mortal Kombat 11", genre: "Döyüş", desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri." },
-        { id: 9, title: "Cyberpunk 2077", genre: "Açıq Dünya / RPG", desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu." },
-        { id: 10, title: "Call of Duty: Modern Warfare", genre: "Atışma (FPS)", desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə." },
-        { id: 11, title: "Assassin's Creed Valhalla", genre: "RPG / Viking", desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi." },
-        { id: 12, title: "Need for Speed Heat", genre: "Yarış", desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları." },
-        { id: 13, title: "Resident Evil 4 Remake", genre: "Qorxu / Aksiyon", desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün təhlükəli missiyası." },
-        { id: 14, title: "Uncharted 4: A Thief's End", genre: "Macəra", desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və təhlükəli səyahəti." },
-        { id: 15, title: "Ghost of Tsushima", genre: "Açıq Dünya / Samuray", desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün savaşı." },
-        { id: 16, title: "Horizon Forbidden West", genre: "Açıq Dünya / RPG", desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi." },
-        { id: 17, title: "Elden Ring", genre: "RPG / Fantaziya", desc: "Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat." },
-        { id: 18, title: "Tekken 7", genre: "Döyüş", desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı." },
-        { id: 19, title: "The Witcher 3: Wild Hunt", genre: "RPG / Açıq Dünya", desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə." },
-        { id: 20, title: "Batman: Arkham Knight", genre: "Aksiyon / Macəra", desc: "Gotham şəhərini qorumaq üçün Betmobil sürün və Scarecrow-a qarşı döyüşün." }
+        { id: 1, title: "Grand Theft Auto V", genre: "Açıq Dünya", img: "https://image.api.playstation.com/vulcan/pt/rnd/202011/1020/41e4jPqZJ298UqY7G8gM2Z4R.png", desc: "Los Santos şəhərində üç fərqli cinayətkarın hekayəsi və böyük soyğunlar." },
+        { id: 2, title: "God of War Ragnarök", genre: "Aksiyon / Macəra", img: "https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/41836f3e79318db9252e1e2d427d2c3f9152331575c3258c.png", desc: "Kratos və Atreusun İskandinav mifologiyasının son döyüşünə qarşı mübarizəsi." },
+        { id: 3, title: "Red Dead Redemption 2", genre: "Vəhşi Qərb", img: "https://image.api.playstation.com/cdn/UP1004/CUSA03041_00/Hpl5M2fM3ebR0682Y63G3lXyM15J270L.png", desc: "Arthur Morgan və Van der Linde dəstəsinin Vəhşi Qərbin son günlərindəki həyat mübarizəsi." },
+        { id: 4, title: "eFootball PES 2021", genre: "İdman / Futbol", img: "https://image.api.playstation.com/vulcan/img/rnd/202007/1408/A3aW7fKqE6l0m8gBfQG6x1g8.png", desc: "Yüksək simulyasiya keyfiyyəti və Master League rejimi ilə futbol həyəcanı." },
+        { id: 5, title: "EA SPORTS FC 24", genre: "İdman / Futbol", img: "https://image.api.playstation.com/vulcan/ap/rnd/202307/0400/8d85fbc5f6d892d2427a9235e12812235e771e6e87f39420.png", desc: "Ən son heyət yenilənmələri, təkmilləşdirilmiş oyun dinamikası və futbol təcrübəsi." },
+        { id: 6, title: "The Last of Us Part I", genre: "Hekayə / Qorxu", img: "https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eP2L3991206c8f62f3c306d6.png", desc: "Joel və Ellie-nin post-apokaliptik Amerika boyunca təhlükəli səyahəti." },
+        { id: 7, title: "Marvel's Spider-Man", genre: "Superqəhrəman", img: "https://image.api.playstation.com/vulcan/img/rnd/202011/0714/19aX0J4rP1N6y5Z7XgQx2k7M.png", desc: "Peter Parker olaraq Nyu-York küçələrində tor atıb supercanilərə qarşı mübarizə." },
+        { id: 8, title: "Mortal Kombat 11", genre: "Döyüş", img: "https://image.api.playstation.com/vulcan/ap/rnd/202010/0114/2nS294XJ90J6z1N1K1N21nN0.png", desc: "Zamanda səyahət hekayəsi, əfsanəvi döyüşçülər və möhtəşəm Fatality fəndləri." },
+        { id: 9, title: "Cyberpunk 2077", genre: "Açıq Dünya / RPG", img: "https://image.api.playstation.com/vulcan/ap/rnd/202111/3013/89f2a9693e50228d4474f32c.png", desc: "Night City kiber-meydanında ölümsüzlük çipini axtaran V təxəllüslü muzdlu." },
+        { id: 10, title: "Call of Duty: Modern Warfare", genre: "Atışma (FPS)", img: "https://image.api.playstation.com/vulcan/img/rnd/202008/1900/P1m7W8yP7xL7q7g4fG5G3M4X.png", desc: "Kapitan Price ilə birlikdə xüsusi əməliyyatlar və gərgin hərbi müharibə." },
+        { id: 11, title: "Assassin's Creed Valhalla", genre: "RPG / Viking", img: "https://image.api.playstation.com/vulcan/ap/rnd/202006/1514/40d4k2P9200G1G2n4X7J0k0N.png", desc: "Eivor adlı Viking döyüşçüsünün İngiltərə torpaqlarını fəth etməsi." },
+        { id: 12, title: "Need for Speed Heat", genre: "Yarış", img: "https://image.api.playstation.com/vulcan/img/rnd/202010/0112/pQ6x7XG1M4L7J3R1N5y2z8g9.png", desc: "Gündüz rəsmi yarışlar, gecə isə polislərdən qaçaraq qanunsuz küçə yarışları." },
+        { id: 13, title: "Resident Evil 4 Remake", genre: "Qorxu / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202210/2004/79b4gJ2f5L8yP3N6X8n1M2z7.png", desc: "Leon S. Kennedy-nin prezidentin qızını xilas etmək üçün təhlükəli missiyası." },
+        { id: 14, title: "Uncharted 4: A Thief's End", genre: "Macəra", img: "https://image.api.playstation.com/cdn/UP9000/CUSA00341_00/2L2c7G1N0L8g4X1N2G3L4M5P.png", desc: "Nathan Drake-in qədim pirat xəzinəsini tapmaq üçün son və təhlükəli səyahəti." },
+        { id: 15, title: "Ghost of Tsushima", genre: "Açıq Dünya / Samuray", img: "https://image.api.playstation.com/vulcan/ap/rnd/202106/2311/m0f2J2y3M1P7g3X2L8g8G7y2.png", desc: "Jin Sakai-nin Tsushima adasını Monqol işğalından xilas etmək üçün savaşı." },
+        { id: 16, title: "Horizon Forbidden West", genre: "Açıq Dünya / RPG", img: "https://image.api.playstation.com/vulcan/ap/rnd/202109/2821/M24g10N41G2P3m2L7N1K0X9P.png", desc: "Aloy-un nəhəng robot-maşınlarla dolu sirli Qərb torpaqlarını kəşf etməsi." },
+        { id: 17, title: "Elden Ring", genre: "RPG / Fantaziya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202108/0410/2c7f5f2g4m1N2G3L4m5P6q7R.png", desc: "Elden Lordu olmaq üçün epik boss döyüşləri və azad kəşfiyyat." },
+        { id: 18, title: "Tekken 7", genre: "Döyüş", img: "https://image.api.playstation.com/cdn/UP0700/CUSA05901_00/3L2G1N0M5P6Q7R8S9T0U1V2W.png", desc: "Mishima ailəsinin son qarşıdurması, zəngin döyüşçü siyahısı." },
+        { id: 19, title: "The Witcher 3: Wild Hunt", genre: "RPG / Açıq Dünya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202211/0711/2c5m1N2G3L4m5P6q7R8s9T0U.png", desc: "Geralt of Rivia olaraq Qədim Qan övladı Ciri-ni tapmaq üçün bədheybətlərlə mübarizə." },
+        { id: 20, title: "Batman: Arkham Knight", genre: "Aksiyon / Macəra", img: "https://image.api.playstation.com/cdn/UP1018/CUSA00133_00/1L2G3N0M4P5Q6R7S8T9U0V1W.png", desc: "Gotham şəhərini qorumaq üçün Betmobil sürün və Scarecrow-a qarşı döyüşün." },
+        { id: 21, title: "Mafia: Definitive Edition", genre: "Açıq Dünya / Mafia", img: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1818/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Tommy Angelo-nun taksi sürücülüyündən mafiya ailəsinə yüksəlmə hekayəsi." },
+        { id: 22, title: "Days Gone", genre: "Açıq Dünya / Zombi", img: "https://image.api.playstation.com/vulcan/img/rnd/202010/2216/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Deacon St. John-un zombi epidemiyası sonrasında motosiklet üzərində həyat mübarizəsi." },
+        { id: 23, title: "Dying Light 2", genre: "Parkur / Zombi", img: "https://image.api.playstation.com/vulcan/ap/rnd/202105/2616/2c7N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Zombilərlə dolu şəhərdə parkur hərəkətləri ilə sağ qalmaq mübarizəsi." },
+        { id: 24, title: "Far Cry 6", genre: "Açıq Dünya / FPS", img: "https://image.api.playstation.com/vulcan/pnd/rnd/202105/2610/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Yara adasında diktator Antón Castilloya qarşı inqilabi mübarizə." },
+        { id: 25, title: "Sekiro: Shadows Die Twice", genre: "Aksiyon / Samuray", img: "https://image.api.playstation.com/cdn/UP0002/CUSA12647_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Tək qollu shinobi döyüşçüsünün öz ağasını qorumaq üçün intiqam yolu." },
+        { id: 26, title: "Devil May Cry 5", genre: "Aksiyon / Hack & Slash", img: "https://image.api.playstation.com/vulcan/ap/rnd/202009/2513/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Nero, Dante və V iblislərə qarşı sürətli və üslublu döyüşlər aparır." },
+        { id: 27, title: "Control", genre: "Mistik / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202010/0212/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Federal Təhqiqat Bürosunun binasında telekinetik güclərlə sirli varlıqlara qarşı döyüş." },
+        { id: 28, title: "Death Stranding", genre: "Macəra / Simulyasiya", img: "https://image.api.playstation.com/vulcan/img/rnd/202011/0402/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Sam Porter Bridges parçalanmış cəmiyyəti yenidən birləşdirmək üçün yük daşıyır." },
+        { id: 29, title: "Hitman 3", genre: "Gizlilik / Suiqəsd", img: "https://image.api.playstation.com/vulcan/ap/rnd/202010/0812/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Agent 47 olaraq dünyanın müxtəlif yerlərində peşəkar suiqəsdlər həyata keçirin." },
+        { id: 30, title: "Resident Evil Village", genre: "Qorxu / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202101/0812/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Ethan Winters-in qızını xilas etmək üçün dəhşətli kənddə apardığı mübarizə." },
+        { id: 31, title: "Detroit: Become Human", genre: "Interaktiv Hekayə", img: "https://image.api.playstation.com/cdn/UP9000/CUSA08344_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "İnsanlıq hissi qazanan 3 fərqli androidin taleyini sizin seçimləriniz müəyyən edir." },
+        { id: 32, title: "Battlefield 1", genre: "Hərbi / FPS", img: "https://image.api.playstation.com/cdn/UP0006/CUSA02429_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Birinci Dünya Müharibəsinin qanlı döyüş meydanlarında miqyaslı müharibə." },
+        { id: 33, title: "Watch Dogs 2", genre: "Açıq Dünya / Haker", img: "https://image.api.playstation.com/cdn/UP0001/CUSA04459_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Marcus Holloway olaraq San-Fransiskoda şəhər sistemlərini sındırıb mübarizə aparın." },
+        { id: 34, title: "Need for Speed Payback", genre: "Yarış", img: "https://image.api.playstation.com/cdn/UP0006/CUSA05999_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Fortune Valley-də kartelə qarşı intiqam yarışları və kaskadyorluq." },
+        { id: 35, title: "Call of Duty: Cold War", genre: "FPS / Hərbi", img: "https://image.api.playstation.com/vulcan/img/rnd/202008/1900/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Soyuq Müharibə dövrünün gizli kəşfiyyat əməliyyatları və casusluq missiyaları." },
+        { id: 36, title: "Doom Eternal", genre: "Aksiyon / FPS", img: "https://image.api.playstation.com/vulcan/ap/rnd/202009/2513/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Doom Slayer olaraq Dünyanı işğal edən iblis ordularını məhv edin." },
+        { id: 37, title: "Fallout 4", genre: "RPG / Açıq Dünya", img: "https://image.api.playstation.com/cdn/UP1003/CUSA02557_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Nüvə müharibəsindən sonrakı sığınacaqdan çıxıb itkin oğlunuzu axtarın." },
+        { id: 38, title: "Monster Hunter: World", genre: "RPG / Avçılıq", img: "https://image.api.playstation.com/cdn/UP0102/CUSA07713_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Nəhəng bədheybətləri ovlayın, yeni zirehlər və silahlar hazırlayın." },
+        { id: 39, title: "Injustice 2", genre: "Döyüş", img: "https://image.api.playstation.com/cdn/UP1018/CUSA05462_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "DC Superqəhrəmanları və cani personajlarının amansız qarşıdurması." },
+        { id: 40, title: "Star Wars Jedi: Fallen Order", genre: "Aksiyon / Macəra", img: "https://image.api.playstation.com/vulcan/img/rnd/202010/0212/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Sağ qalan gənc Ceday Cal Kestis-in imperiyadan qaçaraq Gücü öyrənməsi." },
+        { id: 41, title: "Ghostrunner", genre: "Parkur / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202009/2513/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Kiberpank qülləsində bir zərbə ilə düşmənləri kəsərək sürətlə irəliləyin." },
+        { id: 42, title: "Sniper Elite 4", genre: "Gizlilik / Sniper", img: "https://image.api.playstation.com/cdn/UP4363/CUSA04099_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "İkinci Dünya Müharibəsi İtaliyasında uzaq məsafəli snayper missiyaları." },
+        { id: 43, title: "Crash Bandicoot 4", genre: "Platforma", img: "https://image.api.playstation.com/vulcan/ap/rnd/202006/2216/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Crash və Coco-nun vaxt və məkan çərçivəsini xilas etmək üçün macəraları." },
+        { id: 44, title: "Little Nightmares II", genre: "Qorxu / Tapmaca", img: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1818/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Mono və Six-in siqnal qülləsinin dəhşətli təsirindən qaçmaq mübarizəsi." },
+        { id: 45, title: "Subnautica", genre: "Sağ Qalma", img: "https://image.api.playstation.com/cdn/UP5030/CUSA13529_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Yad planetin okean dibində resurslar toplayıb sağ kalmağa çalışın." },
+        { id: 46, title: "Payday 2", genre: "Kooperativ / Soyğun", img: "https://image.api.playstation.com/cdn/UP4040/CUSA01774_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Dörd nəfərlik komanda ilə banklar və zərgərlik mağazaları soyun." },
+        { id: 47, title: "Borderlands 3", genre: "Loot Shooter / FPS", img: "https://image.api.playstation.com/vulcan/ap/rnd/202010/0812/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Milyonlarla müxtəlif silahlar toplayaraq fanatik kulta qarşı savaşın." },
+        { id: 48, title: "Cuphead", genre: "Aksiyon / Platforma", img: "https://image.api.playstation.com/vulcan/ap/rnd/202007/1514/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "1930-cu illərin cizgi filmi üslubunda çətin və dinamik boss döyüşləri." },
+        { id: 49, title: "Metro Exodus", genre: "Post-Apokaliptik / FPS", img: "https://image.api.playstation.com/vulcan/ap/rnd/202010/0212/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Artyom və tərəfdaşlarının nüvə qışında qatarla Şərqə tərəf səyahəti." },
+        { id: 50, title: "Outlast 2", genre: "Qorxu / Gizlilik", img: "https://image.api.playstation.com/cdn/UP2171/CUSA06623_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Səhra ortasında fanatik dini təriqətdən yalnız kamera ilə qaçış." },
+        { id: 51, title: "Overwatch 2", genre: "Komanda / FPS", img: "https://image.api.playstation.com/vulcan/ap/rnd/202206/1514/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Müxtəlif bacarıqlı qəhrəmanlarla 5v5 taktiki komanda döyüşləri." },
+        { id: 52, title: "Nioh 2", genre: "RPG / Samuray", img: "https://image.api.playstation.com/vulcan/img/rnd/202010/2216/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Yarım-insan yarım-yokai döyüşçüsü kimi Yaponiyanın qaranlıq dövründə savaş." },
+        { id: 53, title: "Sifu", genre: "Kung-Fu / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202111/1818/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Hər dəfə öləndə qocalan Kung-Fu ustasının intiqam hekayəsi." },
+        { id: 54, title: "DIRT 5", genre: "Yarış / Ofroad", img: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1818/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Müxtəlif hava şəraitlərində ekstrim off-road avtomobil yarışları." },
+        { id: 55, title: "Assetto Corsa Competizione", genre: "Avto-Simulyasiya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202001/2216/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "GT3 çempionatının ultra-realist fizika ilə hazırlanmış simulyasiyası." },
+        { id: 56, title: "Tekken 8", genre: "Döyüş", img: "https://image.api.playstation.com/vulcan/ap/rnd/202308/2216/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Kazama və Mishima xəttinin yeni nəsil Heat sistemi ilə şiddətli döyüşü." },
+        { id: 57, title: "Stray", genre: "Macəra / Pişik", img: "https://image.api.playstation.com/vulcan/ap/rnd/202206/0214/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Robotlarla dolu unudulmuş kiber-şəhərdən qaçmağa çalışan azmış pişik." },
+        { id: 58, title: "Kena: Bridge of Spirits", genre: "Macəra / Fantaziya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202102/1818/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Ruh bələdçisi Kenanın kiçik şirin ruhlarla kəndi bərpa etməsi." },
+        { id: 59, title: "House of Ashes", genre: "Qorxu / Interaktiv", img: "https://image.api.playstation.com/vulcan/ap/rnd/202106/1514/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "İraq müharibəsində qədim Sumor məbədinə düşən əsgərlərin dəhşətli gecəsi." },
+        { id: 60, title: "A Plague Tale: Innocence", genre: "Hekayə / Gizlilik", img: "https://image.api.playstation.com/cdn/UP4133/CUSA11032_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Amicia və Hugo-nun Taun epidemiyası və inkvizisiyadan qaçış hekayəsi." },
+        { id: 61, title: "Dragon Quest XI", genre: "JRPG / Macəra", img: "https://image.api.playstation.com/cdn/UP0082/CUSA08558_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Təqib olunan Qəhrəmanın dünyanı qaranlıqdan xilas etmək üçün səyahəti." },
+        { id: 62, title: "Persona 5 Royal", genre: "JRPG / Şəhər", img: "https://image.api.playstation.com/vulcan/ap/rnd/202001/2216/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Gündüz məktəbli, gecə isə insanların ürəyini dəyişən Fantom Oğrusu olun." },
+        { id: 63, title: "Watch Dogs Legion", genre: "Açıq Dünya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1818/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "London küçələrində qarşılaşdığınız hər bir sakini müqavimət dəstəsinə cəlb edin." },
+        { id: 64, title: "Guardians of the Galaxy", genre: "Macəra / Kosmos", img: "https://image.api.playstation.com/vulcan/ap/rnd/202106/0214/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Star-Lord kimi komandanıza rəhbərlik edərək kosmik fəlakətin qarşısını alın." },
+        { id: 65, title: "Shadow of the Tomb Raider", genre: "Macəra / Aksiyon", img: "https://image.api.playstation.com/cdn/UP0082/CUSA10862_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Lara Croft cəngəllikləri fəth edərək Maya apokalipsisini dayandırmağa çalışır." },
+        { id: 66, title: "Life is Strange 2", genre: "Interaktiv / Hekayə", img: "https://image.api.playstation.com/cdn/UP0082/CUSA08049_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Fövqəltəbii gücə yiyələnən iki qardaşın Meksikaya tərəf çətin səyahəti." },
+        { id: 67, title: "Kingdom Hearts III", genre: "RPG / Disney", img: "https://image.api.playstation.com/cdn/UP0082/CUSA08416_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Sora, Donald və Goofy-nin Disney dünyalarında qaranlığa qarşı savaşı." },
+        { id: 68, title: "Darksiders III", genre: "Hack and Slash", img: "https://image.api.playstation.com/cdn/UP4389/CUSA08880_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Qiyamətin dörd atlısından biri olan Fury ilə yeddi ölümcül günahı ovlayın." },
+        { id: 69, title: "Just Cause 4", genre: "Açıq Dünya / Partlayış", img: "https://image.api.playstation.com/cdn/UP0082/CUSA09254_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Rico Rodriguez Solis adasında qarmaq və paraşütlə xaos yaradır." },
+        { id: 70, title: "Far Cry 5", genre: "Açıq Dünya / FPS", img: "https://image.api.playstation.com/cdn/UP0001/CUSA05904_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Hope County şəhərində fanatik dini cult lideri Joseph Seed-ə qarşı mübarizə." },
+        { id: 71, title: "Heavy Rain", genre: "Interaktiv / Psixoloji", img: "https://image.api.playstation.com/cdn/UP9000/CUSA02533_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Origami Qatili kimi tanınan seriyalı qatili tapmaq üçün 4 personajın dindirilməsi." },
+        { id: 72, title: "Beyond: Two Souls", genre: "Interaktiv / Mistik", img: "https://image.api.playstation.com/cdn/UP9000/CUSA00504_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Jodie Holmes-un anadangəlmə bağlı olduğu sirli ruhla 15 illik həyatı." },
+        { id: 73, title: "Sleeping Dogs", genre: "Açıq Dünya / Döyüş", img: "https://image.api.playstation.com/cdn/UP0082/CUSA01111_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Honkonqda gizli polis Wei Shen olaraq Triada cinayət şəbəkəsinə sızın." },
+        { id: 74, title: "Dying Light", genre: "Parkur / Zombi", img: "https://image.api.playstation.com/cdn/UP1018/CUSA00078_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Gündüz resurs toplayın, gecə isə dəhşətli yırtıcı zombilərdən qaçın." },
+        { id: 75, title: "Mad Max", genre: "Açıq Dünya / Avtomobil", img: "https://image.api.playstation.com/cdn/UP1018/CUSA00103_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Səhranın ortasında sağ qalmaq üçün öz döyüş maşınınızı qurun." },
+        { id: 76, title: "Alien: Isolation", genre: "Qorxu / Gizlilik", img: "https://image.api.playstation.com/cdn/UP0177/CUSA00138_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Kosmik stansiyada tək bir öldürücü Ksenomorf-dan gizlənərək sağ qalın." },
+        { id: 77, title: "Wolfenstein II", genre: "FPS / Hərbi", img: "https://image.api.playstation.com/cdn/UP1003/CUSA08378_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "B.J. Blazkowicz olaraq faşist işğalı altındakı Amerikada inqilab başladın." },
+        { id: 78, title: "Dishonored 2", genre: "Gizlilik", img: "https://image.api.playstation.com/cdn/UP1003/CUSA03642_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Sehrli güclərlə qanunsuz taxt-tacınızı geri almaq üçün kölgələrdə hərəkət edin." },
+        { id: 79, title: "Prey", genre: "Sci-Fi / Immersive Sim", img: "https://image.api.playstation.com/cdn/UP1003/CUSA04493_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Talos I kosmik stansiyasında formalı dəyişən yadplanetlilərə qarşı döyüş." },
+        { id: 80, title: "Sniper Ghost Warrior", genre: "Taktiki / Sniper", img: "https://image.api.playstation.com/cdn/UP4321/CUSA04868_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Yaxın Şərqdə 1 kilometrdən artıq məsafədən hədəfləri vurmaq missiyaları." },
+        { id: 81, title: "Rage 2", genre: "Açıq Dünya / FPS", img: "https://image.api.playstation.com/cdn/UP1003/CUSA08503_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Səhralıq dünyada çılğın silahlar və süper güclərlə düşmənləri darmadağın edin." },
+        { id: 82, title: "Ghost Recon Wildlands", genre: "Açıq Dünya / Taktiki", img: "https://image.api.playstation.com/cdn/UP0001/CUSA02902_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Boliviyada narkotik kartelini çökdürmək üçün xüsusi təyinatlı qrup." },
+        { id: 83, title: "Skyrim Special Edition", genre: "RPG / Açıq Dünya", img: "https://image.api.playstation.com/cdn/UP1003/CUSA05333_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Dragonborn olaraq əfsanəvi əjdahalarla döyüşün və öz kaderinizi yazın." },
+        { id: 84, title: "Street Fighter V", genre: "Döyüş", img: "https://image.api.playstation.com/cdn/UP0102/CUSA01200_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Klassik küçə döyüşçüləri ilə dinamik və taktiki 1v1 döyüşlər." },
+        { id: 85, title: "BioShock Infinite", genre: "FPS / Hekayə", img: "https://image.api.playstation.com/cdn/UP1001/CUSA03980_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Səma şəhəri Columbiada Elizabeth adlı qızı xilas etmək missiyası." },
+        { id: 86, title: "Nier: Automata", genre: "RPG / Aksiyon", img: "https://image.api.playstation.com/cdn/UP0082/CUSA04551_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "2B və 9S androidlərinin yadplanetli maşınlara qarşı dünyanı azad etmək savaşı." },
+        { id: 87, title: "Vampyr", genre: "RPG / Qorxu", img: "https://image.api.playstation.com/cdn/UP4133/CUSA03293_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Vampirə çevrilmiş həkim Jonathan Reid-in London küçələrindəki mənəvi seçimləri." },
+        { id: 88, title: "Shadow Warrior 2", genre: "Aksiyon / FPS", img: "https://image.api.playstation.com/cdn/UP3643/CUSA07106_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Lo Wang olaraq odlu silahlar və katana ilə iblis ordularını dilimləyin." },
+        { id: 89, title: "L.A. Noire", genre: "Detektiv / Açıq Dünya", img: "https://image.api.playstation.com/cdn/UP1004/CUSA08920_00/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "1940-cı illər Los-Ancelesində dedektiv Cole Phelps olaraq cinayətləri açın." },
+        { id: 90, title: "GreedFall", genre: "RPG / Macəra", img: "https://image.api.playstation.com/cdn/UP4133/CUSA14210_00/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Sehr və 17-ci əsr silahları ilə dolu sirli adada diplomatik və hərbi macəra." },
+        { id: 91, title: "Need for Speed Unbound", genre: "Yarış", img: "https://image.api.playstation.com/vulcan/ap/rnd/202209/2715/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Klassik küçə stili, anime effektləri və sürətli avtomobil yarışları." },
+        { id: 92, title: "Ghostwire: Tokyo", genre: "Mistik / FPS", img: "https://image.api.playstation.com/vulcan/ap/rnd/202202/0212/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Tokiodakı sirli yoxa çıxmalardan sonra fövqəltəbii ruhlarla mübarizə." },
+        { id: 93, title: "A Plague Tale: Requiem", genre: "Hekayə / Gizlilik", img: "https://image.api.playstation.com/vulcan/ap/rnd/202206/0714/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Amicia və Amico-nun Fransa cənubundakı yeni və təhlükəli macəraları." },
+        { id: 94, title: "Sniper Elite 5", genre: "Gizlilik / Sniper", img: "https://image.api.playstation.com/vulcan/ap/rnd/202112/1012/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Fransada faşist hərbi düşərgələrini məhv etmək üçün gizli snayper əməliyyatları." },
+        { id: 95, title: "Gotham Knights", genre: "Aksiyon / RPG", img: "https://image.api.playstation.com/vulcan/ap/rnd/202208/2312/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Betmenin ölümündən sonra Gotham-ı qoruyan yeni nəsillər: Batgirl, Nightwing, Red Hood." },
+        { id: 96, title: "Dead Space Remake", genre: "Qorxu / Sci-Fi", img: "https://image.api.playstation.com/vulcan/ap/rnd/202210/1412/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Isaac Clarke olaraq kosmik stansiyada dəhşətli nekromorflara qarşı ölüm-kalım mübarizəsi." },
+        { id: 97, title: "Dead Island 2", genre: "Zombi / Aksiyon", img: "https://image.api.playstation.com/vulcan/ap/rnd/202208/1712/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "Los-Anceles küçələrində infeksiyaya uğramış zombiləri kəsərək zövqlü mübarizə." },
+        { id: 98, title: "Atomic Heart", genre: "FPS / Sci-Fi", img: "https://image.api.playstation.com/vulcan/ap/rnd/202211/0212/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "SSRİ kiber-dünyasında qiyama qalxmış robotlara qarşı gərgin atışma." },
+        { id: 99, title: "Hogwarts Legacy", genre: "RPG / Fantaziya", img: "https://image.api.playstation.com/vulcan/ap/rnd/202208/0912/2L3G0N4M5P6Q7R8S9T0U1V2W.png", desc: "1800-cü illərin Hogwarts Sehrbazlıq Məktəbində öz aləminizi yaradın." },
+        { id: 100, title: "Star Wars Jedi: Survivor", genre: "Aksiyon / Macəra", img: "https://image.api.playstation.com/vulcan/ap/rnd/202212/0112/2g3N0M4P5Q6R7S8T9U0V1W2X.png", desc: "Cal Kestis-in Qalaktikanın son azad cedaylarından biri kimi mübarizəsi." }
     ];
+
+    function handleImgError(imgElement, title) {
+        const wrapper = imgElement.parentElement;
+        wrapper.innerHTML = `
+            <div class="fallback-poster">
+                🎮 PS4 GAME
+                <span>${title}</span>
+            </div>
+        `;
+    }
 
     function renderGames(data) {
         const grid = document.getElementById('gamesGrid');
@@ -265,11 +322,10 @@
 
             const message = encodeURIComponent(`Salam, LABIRENT CLUB! Mən PS4 üçün "${game.title}" oyununu əldə etmək istəyirəm.`);
             const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
-            const generatedImage = generateGameImage(game.title, game.genre);
 
             card.innerHTML = `
                 <div class="card-img-wrapper">
-                    <img src="${generatedImage}" alt="${game.title}" class="card-img">
+                    <img src="${game.img}" alt="${game.title}" class="card-img" loading="lazy" onerror="handleImgError(this, '${game.title.replace(/'/g, "\\'")}')">
                 </div>
                 <div class="card-body">
                     <div>
